@@ -1,0 +1,18 @@
+/* style.css */
+
+.heading-label {
+    -fx-font-size: 18px;
+    -fx-text-fill: orange; /* Orange text color */
+}
+
+.field-label {
+    -fx-text-fill: orange; /* Orange text color */
+}
+
+.text-field {
+    -fx-text-fill: black; /* Black text color */
+}
+
+.submit-button {
+    -fx-text-fill: orange; /* Orange text color */
+}

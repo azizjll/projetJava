@@ -10,6 +10,11 @@ public class ConnectionManager {
     private static final String USER = "root";
     private static final String PASSWORD = "";
 
+
+
+
+
+
     // Method to get a connection to the database
     public static Connection getConnection() {
         Connection connection = null;

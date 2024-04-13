@@ -1,9 +1,17 @@
 package esprit.monstergym.demo.Main;
 
-import esprit.monstergym.demo.Entities.User;
-import esprit.monstergym.demo.Service.UserService;
+import esprit.monstergym.demo.Entities.Annonce;
+import esprit.monstergym.demo.Entities.Commentaire;
+
+
+import esprit.monstergym.demo.Service.AnnonceService;
+import esprit.monstergym.demo.Service.CommentaireService;
+
+
 
 import java.sql.Date;
+import java.sql.Timestamp;
+
 import java.util.List;
 
 public class Main {
@@ -14,81 +22,106 @@ public class Main {
 
         // Convert java.util.Date to java.sql.Date
         Date sqlDate = new Date(currentDate.getTime());
-        // Test creating a new user
-        UserService userService = new UserService();
-        User newUser = new User(
-                1, // Example ID, replace with actual ID if necessary
-                "testuser",
-                "testuser@example.com",
-                "{\"role\":\"user\"}", // Example roles JSON string, replace with actual JSON string if necessary
-                "abc123",
-                "password123",
-                true,
-                sqlDate, // Example date, replace with actual date if necessary
-                "123456789",
-                123456789,
-                1,
-                "image_url",
-                "borchure_filename"
-        );
-        userService.create(newUser);
-        displayAllUsers(userService);
-        // Test updating an existing user
-        newUser.setUsername("updatedusername");
-        userService.update(newUser);
-        System.out.println("After updating:");
-        displayAllUsers(userService);
 
-        // Test deleting an existing user
-        userService.delete(newUser);
-        System.out.println("After deleting:");
-        displayAllUsers(userService);
+        //creating new annonce
 
-        // Creation of two new users
-        User newUser1 = new User(
-                2, // Example ID, replace with actual ID if necessary
-                "newuser1",
-                "newuser1@example.com",
-                "{\"role\":\"user\"}", // Example roles JSON string, replace with actual JSON string if necessary
-                "abc123",
-                "password123",
-                true,
-                sqlDate, // Example date, replace with actual date if necessary
-                "987654321",
-                987654321,
-                1,
-                "new_image_url_1",
-                "new_borchure_filename_1"
-        );
+        // Instantiate an Annonce object with the necessary details
+        Annonce annonce = new Annonce();
+        annonce.setTitre("manel annonce");
+        annonce.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit.");
+        annonce.setDate(new Date(System.currentTimeMillis())); // Use the current date
 
-        User newUser2 = new User(
-                3, // Example ID, replace with actual ID if necessary
-                "newuser2",
-                "newuser2@example.com",
-                "{\"role\":\"user\"}", // Example roles JSON string, replace with actual JSON string if necessary
-                "abc123",
-                "password123",
-                true,
-                sqlDate, // Example date, replace with actual date if necessary
-                "654321987",
-                654321987,
-                1,
-                "new_image_url_2",
-                "new_borchure_filename_2"
-        );
+        // Use AnnonceService to add the annonce to the database
+        AnnonceService annonceService = new AnnonceService();
+        annonceService.create(annonce);
 
-        // Create and display two new users
-        userService.create(newUser1);
-        userService.create(newUser2);
-        System.out.println("After creating two new users:");
-        displayAllUsers(userService);
-    }
+        System.out.println("New annonce added to the database.");
 
-    private static void displayAllUsers(UserService userService) {
-        List<User> userList = userService.getAll();
-        System.out.println("All users:");
-        for (User user : userList) {
-            System.out.println(user);
+        //show comments
+
+        // Instantiate a CommentaireService
+        CommentaireService commentaireService = new CommentaireService();
+
+        // Retrieve all comments from the database
+        List<Commentaire> commentaires = commentaireService.getAll();
+
+// Display each comment
+        for (Commentaire currentcommentaire : commentaires) {
+            System.out.println("Ref: " + currentcommentaire.getRef());
+            System.out.println("Message: " + currentcommentaire.getMessage());
+            System.out.println("Date: " + currentcommentaire.getTimestamp());
+            System.out.println("------------------------------");
         }
+
+
+        // Retrieve all annonces from the database
+        List<Annonce> annonces = annonceService.getAll();
+
+        // Display each annonce
+        for (Annonce currentAnnonce : annonces) {
+            int annonceId = currentAnnonce.getId(); // Storing the ID in a new variable
+
+            System.out.println("Annonce ID: " + currentAnnonce.getId());
+            System.out.println("Titre: " + currentAnnonce.getTitre());
+            System.out.println("Description: " + currentAnnonce.getDescription());
+            System.out.println("Date: " + currentAnnonce.getDate());
+            System.out.println("------------------------------");
+        }
+
+
+
+        //
+        // Find and delete the annonce with ID 22
+        int annonceIdToDelete = 24;
+        boolean isDeleted = false;
+        for (Annonce currentAnnonce : annonces) {
+            if (currentAnnonce.getId() == annonceIdToDelete) {
+                annonceService.delete(currentAnnonce);
+                isDeleted = true;
+                break;
+            }
+        }
+
+        if (isDeleted) {
+            System.out.println("Annonce with ID " + annonceIdToDelete + " deleted successfully.");
+        } else {
+            System.out.println("Annonce with ID " + annonceIdToDelete + " not found.");
+        }
+
+        // Create a new Commentaire object
+        int ref = 20; // Assuming ref is 1
+        String message = "This is a new comment with timestamp";
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis()); // Use the current date
+        int annonceId = 25; // Assuming annonce_id is 25
+        Commentaire commentaire = new Commentaire(ref, message, timestamp, annonceId);
+
+        // Instantiate a CommentaireService
+       // CommentaireService commentaireService = new CommentaireService();
+
+        // Call the create method to insert the new Commentaire into the database
+        commentaireService.create(commentaire);
+
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
+
+
+
+
+

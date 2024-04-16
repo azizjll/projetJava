@@ -33,6 +33,7 @@ public class CommentaireController {
 
 
     private CommentaireService commentaireService;
+    private int annonce_id;
 
     public CommentaireController() {
         commentaireService = new CommentaireService();
@@ -59,12 +60,11 @@ public class CommentaireController {
             deleteButton.setStyle("-fx-text-fill: red;");
 
             deleteButton.setOnAction(event -> handleDeleteButtonAction(commentaire));
-
-
-
-
-
             Separator separator = new Separator(Orientation.HORIZONTAL);
+            // Create a ScrollPane and set its content to commentaireContainer
+            ScrollPane scrollPane = new ScrollPane(commentaireContainer);
+            scrollPane.setFitToWidth(true); // Ensures the ScrollPane adjusts to the width of its content
+
             commentaireContainer.getChildren().addAll(messageLabel, dateLabel,deleteButton, separator);
         }
     }
@@ -85,7 +85,8 @@ public class CommentaireController {
         int ref = generateRef();
         System.out.println("Generated ref: " + ref);
         String message = messageTextArea.getText();
-        int annonceId = Integer.parseInt(annonceIdTextField.getText());
+       int annonceId = Integer.parseInt(annonceIdTextField.getText());
+
 
         // Create a new Commentaire object
         Commentaire newCommentaire = new Commentaire(ref, message, getCurrentTimestamp(), annonceId);
@@ -126,7 +127,10 @@ public class CommentaireController {
         messageTextArea.clear();
         annonceIdTextField.clear();
     }
-
+    // Method to set the annonce_id attribute
+    public void setannonce_id(int annonce_id) {
+        this.annonce_id = annonce_id;
+    }
 
 }
 

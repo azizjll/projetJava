@@ -18,7 +18,7 @@ public class AnnonceService implements IService<Annonce> {
 
             preparedStatement.setString(1, entity.getTitre());
             preparedStatement.setString(2, entity.getDescription());
-            preparedStatement.setDate(3, entity.getDate());
+            preparedStatement.setTimestamp(3, entity.getTimestamp());
 
             preparedStatement.executeUpdate();
             System.out.println("Annonce created successfully");
@@ -34,7 +34,6 @@ public class AnnonceService implements IService<Annonce> {
 
             preparedStatement.setString(1, entity.getTitre());
             preparedStatement.setString(2, entity.getDescription());
-            preparedStatement.setDate(3, entity.getDate());
             preparedStatement.setString(4, entity.getImageUrl());
             preparedStatement.setInt(5, entity.getId());
 
@@ -64,12 +63,12 @@ public class AnnonceService implements IService<Annonce> {
         List<Annonce> annonceList = new ArrayList<>();
         try (Connection connection = ConnectionManager.getConnection();
              Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery("SELECT * FROM annonce")) {
+             ResultSet resultSet = statement.executeQuery("SELECT * FROM annonce ORDER BY date DESC")) {
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String titre = resultSet.getString("titre");
                 String description = resultSet.getString("description");
-                Date date = resultSet.getDate("date");
+                Timestamp date = resultSet.getTimestamp("date");
 
                 Annonce annonce = new Annonce(id, titre, description, date);
                 annonceList.add(annonce);

@@ -29,7 +29,6 @@ public class Main {
         Annonce annonce = new Annonce();
         annonce.setTitre("manel annonce");
         annonce.setDescription("Lorem ipsum dolor sit amet, consectetur adipiscing elit.");
-        annonce.setDate(new Date(System.currentTimeMillis())); // Use the current date
 
         // Use AnnonceService to add the annonce to the database
         AnnonceService annonceService = new AnnonceService();
@@ -64,7 +63,6 @@ public class Main {
             System.out.println("Annonce ID: " + currentAnnonce.getId());
             System.out.println("Titre: " + currentAnnonce.getTitre());
             System.out.println("Description: " + currentAnnonce.getDescription());
-            System.out.println("Date: " + currentAnnonce.getDate());
             System.out.println("------------------------------");
         }
 

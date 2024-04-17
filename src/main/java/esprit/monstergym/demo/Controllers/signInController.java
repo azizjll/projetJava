@@ -85,14 +85,12 @@ public class signInController implements Initializable {
                         Stage currentStage = (Stage) tfEmail.getScene().getWindow();
                         currentStage.close();
                     } else if (authenticatedUser.hasRole("ROLE_CLIENT") || authenticatedUser.hasRole("ROLE_COACH")) {
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/esprit/monstergym/demo/hello-view.fxml"));
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/esprit/monstergym/demo/DashboardClient.fxml"));
                         Parent root = loader.load();
 
                         // Pass the user to the DashboardClientController
 
-                        HelloController helloController = loader.getController();
-                        System.out.println(authenticatedUser.toString());
-                        helloController.setUser(authenticatedUser);
+
 
 
                         // Create a new stage for the new scene

@@ -41,7 +41,7 @@
                   </ImageView>
                </children>
             </HBox>
-            <Label fx:id="lbFullName" layoutX="64.0" layoutY="93.0" opacity="0.7" prefHeight="30.0" prefWidth="437.0">
+            <Label fx:id="lbFullName" layoutX="64.0" layoutY="93.0" opacity="0.7" prefHeight="30.0" prefWidth="437.0"  textFill="RED">
                <font>
                   <Font size="14.0" />
                </font></Label>
@@ -62,7 +62,7 @@
                   </ImageView>
                </children>
             </HBox>
-            <Label fx:id="lbEmail" layoutX="61.0" layoutY="224.0" opacity="0.7" prefHeight="30.0" prefWidth="460.0">
+            <Label fx:id="lbEmail" layoutX="61.0" layoutY="224.0" opacity="0.7" prefHeight="30.0" prefWidth="460.0" textFill="RED">
                <font>
                   <Font size="14.0" />
                </font></Label>
@@ -88,7 +88,7 @@
                   </ImageView>
                </children>
             </HBox>
-            <Label fx:id="lbDate" layoutX="61.0" layoutY="341.0" opacity="0.7" prefHeight="30.0" prefWidth="473.0">
+            <Label fx:id="lbDate" layoutX="61.0" layoutY="341.0" opacity="0.7" prefHeight="30.0" prefWidth="473.0" textFill="RED">
                <font>
                   <Font size="14.0" />
                </font></Label>
@@ -112,7 +112,7 @@
                   </ImageView>
                </children>
             </HBox>
-            <Label fx:id="lbNumber" layoutX="669.0" layoutY="97.0" opacity="0.7" prefHeight="23.0" prefWidth="447.0">
+            <Label fx:id="lbNumber" layoutX="669.0" layoutY="97.0" opacity="0.7" prefHeight="23.0" prefWidth="447.0" textFill="RED">
                <font>
                   <Font size="14.0" />
                </font></Label>
@@ -129,7 +129,7 @@
                   </ImageView>
                </children>
             </HBox>
-            <Label fx:id="lbPassword" layoutX="653.0" layoutY="224.0" opacity="0.7" prefHeight="30.0" prefWidth="481.0">
+            <Label fx:id="lbPassword" layoutX="653.0" layoutY="224.0" opacity="0.7" prefHeight="30.0" prefWidth="481.0" textFill="RED">
                <font>
                   <Font size="14.0" />
                </font></Label>
@@ -146,7 +146,7 @@
                   </ImageView>
                </children>
             </HBox>
-            <Label fx:id="lbConfirmPassword" layoutX="669.0" layoutY="345.0" opacity="0.7" prefHeight="30.0" prefWidth="473.0">
+            <Label fx:id="lbConfirmPassword" layoutX="669.0" layoutY="345.0" opacity="0.7" prefHeight="30.0" prefWidth="473.0" textFill="RED">
                <font>
                   <Font size="14.0" />
                </font></Label>

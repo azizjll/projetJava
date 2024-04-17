@@ -19,6 +19,8 @@ import animatefx.animation.Shake;
 import javafx.geometry.Insets;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.scene.Node;
+
 
 
 import java.io.IOException;
@@ -138,7 +140,8 @@ public class DashboardAdminController {
             newStage.show();
 
             // Close the current stage
-
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

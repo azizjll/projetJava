@@ -20,7 +20,11 @@ public class User {
     private String imageUrl;
     private String brochureFilename;
 
+    private Button blockButton;
     public static User Current_User;
+
+    private Button etatButton;
+
 
 
 
@@ -77,6 +81,7 @@ public class User {
         this.username = username;
         this.email = email;
         this.etat = etat;
+
 
     }
 
@@ -204,6 +209,14 @@ public class User {
         this.etat = etat;
     }
 
+    public Button getEtatButton() {
+        return etatButton;
+    }
+
+    public void setEtatButton(Button etatButton) {
+        this.etatButton = etatButton;
+    }
+
 
     // imageUrl
     public String getImageUrl() {
@@ -217,6 +230,14 @@ public class User {
     // brochureFilename
     public String getBrochureFilename() {
         return brochureFilename;
+    }
+
+    public Button getBlockButton() {
+        return blockButton;
+    }
+
+    public void setBlockButton(Button blockButton) {
+        this.blockButton = blockButton;
     }
 
     public void setBrochureFilename(String brochureFilename) {

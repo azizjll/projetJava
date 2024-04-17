@@ -13,14 +13,14 @@
    <children>
       <VBox prefHeight="600.0" prefWidth="294.0" style="-fx-background-color: #c39f6d;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Pane prefHeight="134.0" prefWidth="294.0" style="-fx-background-color: #d46d6d;" styleClass="pane">
+            <Pane prefHeight="134.0" prefWidth="294.0" style="-fx-background-color: #c39f6d;" styleClass="pane">
                <children>
-                  <Label layoutX="74.0" layoutY="43.0" prefHeight="53.0" prefWidth="161.0" text="AURORA" textFill="WHITE">
+                  <Label layoutX="29.0" layoutY="43.0" prefHeight="53.0" prefWidth="281.0" text="MONSTER GYM" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="36.0" />
                      </font>
                   </Label>
-                  <FontAwesomeIconView fill="WHITE" glyphName="XING" layoutX="21.0" layoutY="95.0" size="70" wrappingWidth="65.65001201629639" />
+                  <FontAwesomeIconView fill="WHITE" glyphName="XING" layoutX="-5.0" layoutY="89.0" size="50" wrappingWidth="42.44999980926514" />
                </children>
                <VBox.margin>
                   <Insets bottom="130.0" />

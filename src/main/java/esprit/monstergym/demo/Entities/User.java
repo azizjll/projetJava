@@ -19,11 +19,12 @@ public class User {
     private Integer etat;
     private String imageUrl;
     private String brochureFilename;
+    private String verified;
+
 
     private Button blockButton;
     public static User Current_User;
 
-    private Button etatButton;
 
 
 
@@ -93,7 +94,7 @@ public class User {
         this.numero = numero;
         this.username = username;
         this.email = email;
-        this.etat=etat;
+        this.blockButton = btnBLock;
     }
 
     public User(String username, String email, String numTel, boolean isBlocked) {
@@ -209,13 +210,7 @@ public class User {
         this.etat = etat;
     }
 
-    public Button getEtatButton() {
-        return etatButton;
-    }
 
-    public void setEtatButton(Button etatButton) {
-        this.etatButton = etatButton;
-    }
 
 
     // imageUrl
@@ -280,4 +275,11 @@ public class User {
         return this.roles.contains(role);
     }
 
+    public String getVerified() {
+        return verified;
+    }
+
+    public void setVerified(String verified) {
+        this.verified = verified;
+    }
 }

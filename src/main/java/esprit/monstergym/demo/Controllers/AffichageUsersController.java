@@ -2,6 +2,8 @@ package esprit.monstergym.demo.Controllers;
 
 import java.net.URL;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
 import java.util.logging.Level;
@@ -84,17 +86,23 @@ public class AffichageUsersController {
 
     @FXML
     private void initialize() {
+        fnReloadData();
+
+    }
+
+    private void fnReloadData(){
         // Associer les colonnes du tableau aux propriétés de l'objet User
         numeroCol.setCellValueFactory(new PropertyValueFactory<>("numero"));
         usernameCol.setCellValueFactory(new PropertyValueFactory<>("username"));
         emailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
-        etatCol.setCellValueFactory(new PropertyValueFactory<>("etat"));
+        etatCol.setCellValueFactory(new PropertyValueFactory<>("blockButton"));
         dateCol.setCellValueFactory(new PropertyValueFactory<>("dateNaissance"));
-        isVerifiedCol.setCellValueFactory(new PropertyValueFactory<>("is_verified"));
+        isVerifiedCol.setCellValueFactory(new PropertyValueFactory<>("verified"));
 
         // Charger les données depuis la base de données et les afficher dans le tableau
-        loadDataFromDatabase();
 
+        tableViewUsers.getItems().clear();
+        tableViewUsers.getItems().addAll(loadDataFromDatabase());
         ObservableList<String> listTrier = FXCollections.observableArrayList("username","email","date","numero");
         comboBox.setItems(listTrier);
 
@@ -133,87 +141,46 @@ public class AffichageUsersController {
             tableViewUsers.setItems(sortedData);
         });
 
-
     }
-
-    private void loadDataFromDatabase() {
+    private List<User> loadDataFromDatabase() {
+        List<User> data= new ArrayList<>();
         UserService us = new UserService();
         for(int i=  0 ; i<us.getAll().size();i++){
             System.out.println(us.getAll().get(i).toString());
-            tableViewUsers.getItems().add(us.getAll().get(i));
-        }
-    }
-
-    private void refrachListClck() {
-        userList.clear();
-
-        try (Connection connection = ConnectionManager.getConnection()) {
-            String query = "SELECT * FROM `user` WHERE id != 1";
-            try (PreparedStatement statement = connection.prepareStatement(query);
-                 ResultSet resultSet = statement.executeQuery()) {
-
-                while (resultSet.next()) {
-                    // Récupération de l'état de vérification de l'utilisateur
-                    String verificationStatus = resultSet.getInt("is_verified") == 1 ? "Compte Verified" : "Compte non Verified";
-
-                    // Création du bouton d'état de blocage
-                     Button blockButton = new Button();
-                    String etat;
-                    if (!resultSet.getBoolean("etat")) {
-                        blockButton.setText("Blocked");
-                        blockButton.setStyle("-fx-background-color: red; -fx-text-fill: white;");
-                        etat = "Blocked";
-                    } else {
-                        blockButton.setText("Deblocked");
-                        blockButton.setStyle("-fx-background-color: green; -fx-text-fill: white;");
-                        etat = "Deblocked";
-                    }
-
-                    // Ajout de l'utilisateur à la liste des utilisateurs
-                    userList.add(new User(
-                            resultSet.getString("numero"),
-                            resultSet.getString("username"),
-                            resultSet.getString("email"),
-                            // Ajout de l'état de vérification
-                            blockButton// Ajout de l'état de blocage
-
-                    ));
-                }
+            User user = us.getAll().get(i);
+            if(user.getIs_verified())
+            user.setVerified("Verified");
+            else
+            user.setVerified("Not Verified");
+            Button blockButton = new Button();
+            if (user.getEtat() == 1) {
+                blockButton.setText("Block");
+                blockButton.setStyle("-fx-background-color: red; -fx-text-fill: white;");
+                blockButton.setOnAction(e -> {
+                       // Handle button click event here
+                    // For example, you can call a method to handle blocking/deblocking
+                    user.setEtat(0);
+                    us.update(user);
+                    fnReloadData();
+                });
+            } else {
+                blockButton.setText("Deblock");
+                blockButton.setStyle("-fx-background-color: green; -fx-text-fill: white;");
+                blockButton.setOnAction(e -> {
+                    // Handle button click event here
+                    // For example, you can call a method to handle blocking/deblocking
+                    user.setEtat(1);
+                    us.update(user);
+                    fnReloadData();
+                });
             }
-            tableViewUsers.setItems(userList);
-        } catch (SQLException ex) {
-            Logger.getLogger(AffichageUsersController.class.getName()).log(Level.SEVERE, null, ex);
+            user.setBlockButton(blockButton);
+            data.add(user);
+
+
         }
+        return data;
     }
-
-    private void loadData() throws SQLException {
-        userList.clear();
-
-        try (Connection connection = ConnectionManager.getConnection()) {
-            String query = "SELECT * FROM `user` WHERE id != 1";
-            PreparedStatement statement = connection.prepareStatement(query);
-            ResultSet resultSet = statement.executeQuery();
-
-            while (resultSet.next()) {
-                boolean isBlocked = !resultSet.getBoolean("etat");
-                userList.add(new User(
-                        resultSet.getString("username"),
-                        resultSet.getString("email"),
-                        resultSet.getString("num_tel"),
-                        isBlocked // Passer la valeur boolean de l'état
-                ));
-            }
-            statement.close();
-            resultSet.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(AffichageUsersController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
-            Logger.getLogger(AffichageUsersController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        tableViewUsers.setItems(userList);
-    }
-
     @FXML
     void Select(ActionEvent event) {
         if (comboBox.getSelectionModel().getSelectedItem().toString().equals("username")) {
@@ -227,21 +194,7 @@ public class AffichageUsersController {
                         // Récupération de l'état de vérification de l'utilisateur
                         String verificationStatus = resultSet.getInt("is_verified") == 1 ? "Compte Verified" : "Compte non Verified";
 
-                        // Création du bouton d'état de blocage
-                        Button blockButton = new Button();
-                        String etat;
-                        if (!resultSet.getBoolean("etat")) {
-                            blockButton.setText("Blocked");
-                            blockButton.setStyle("-fx-background-color: red; -fx-text-fill: white;");
-                            etat = "Blocked";
-                        } else {
-                            blockButton.setText("Deblocked");
-                            blockButton.setStyle("-fx-background-color: green; -fx-text-fill: white;");
-                            etat = "Deblocked";
-                        }
-
-                        // Ajout de l'utilisateur à la liste des utilisateurs
-                        userList.add(new User(
+                        User user = new User(
                                 resultSet.getInt("id"),
                                 resultSet.getString("username"),
                                 resultSet.getString("email"),
@@ -256,12 +209,41 @@ public class AffichageUsersController {
                                 resultSet.getString("image_url"),
                                 resultSet.getString("borchure_filename")// Ajout de l'état de blocage
 
-                        ));
+                        );
+                        if(user.getIs_verified())
+                            user.setVerified("Verified");
+                        else
+                            user.setVerified("Not Verified");
+                        UserService us = new UserService();
+                        Button blockButton = new Button();
+                        if (user.getEtat() == 1) {
+                            blockButton.setText("Block");
+                            blockButton.setStyle("-fx-background-color: red; -fx-text-fill: white;");
+                            blockButton.setOnAction(e -> {
+                                // Handle button click event here
+                                // For example, you can call a method to handle blocking/deblocking
+                                user.setEtat(0);
+                                us.update(user);
+                                fnReloadData();
+                            });
+                        } else {
+                            blockButton.setText("Deblock");
+                            blockButton.setStyle("-fx-background-color: green; -fx-text-fill: white;");
+                            blockButton.setOnAction(e -> {
+                                // Handle button click event here
+                                // For example, you can call a method to handle blocking/deblocking
+                                user.setEtat(1);
+                                us.update(user);
+                                fnReloadData();
+                            });
+                        }
+                        user.setBlockButton(blockButton);
+                        userList.add(user);
                     }
                 }
                 tableViewUsers.setItems(userList);
             } catch (SQLException ex) {
-                Logger.getLogger(AffichageUsersController.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println(ex.getMessage());
             }
 
         } else if (comboBox.getSelectionModel().getSelectedItem().toString().equals("email")) {
@@ -274,22 +256,7 @@ public class AffichageUsersController {
                     while (resultSet.next()) {
                         // Récupération de l'état de vérification de l'utilisateur
                         String verificationStatus = resultSet.getInt("is_verified") == 1 ? "Compte Verified" : "Compte non Verified";
-
-                        // Création du bouton d'état de blocage
-                        Button blockButton = new Button();
-                        String etat;
-                        if (!resultSet.getBoolean("etat")) {
-                            blockButton.setText("Blocked");
-                            blockButton.setStyle("-fx-background-color: red; -fx-text-fill: white;");
-                            etat = "Blocked";
-                        } else {
-                            blockButton.setText("Deblocked");
-                            blockButton.setStyle("-fx-background-color: green; -fx-text-fill: white;");
-                            etat = "Deblocked";
-                        }
-
-                        // Ajout de l'utilisateur à la liste des utilisateurs
-                        userList.add(new User(
+                        User user = new User(
                                 resultSet.getInt("id"),
                                 resultSet.getString("username"),
                                 resultSet.getString("email"),
@@ -302,14 +269,43 @@ public class AffichageUsersController {
                                 resultSet.getInt("cin"),
                                 resultSet.getInt("etat"),
                                 resultSet.getString("image_url"),
-                                resultSet.getString("borchure_filename")
+                                resultSet.getString("borchure_filename")// Ajout de l'état de blocage
 
-                        ));
+                        );
+                        if(user.getIs_verified())
+                            user.setVerified("Verified");
+                        else
+                            user.setVerified("Not Verified");
+                        UserService us = new UserService();
+                        Button blockButton = new Button();
+                        if (user.getEtat() == 1) {
+                            blockButton.setText("Block");
+                            blockButton.setStyle("-fx-background-color: red; -fx-text-fill: white;");
+                            blockButton.setOnAction(e -> {
+                                // Handle button click event here
+                                // For example, you can call a method to handle blocking/deblocking
+                                user.setEtat(0);
+                                us.update(user);
+                                fnReloadData();
+                            });
+                        } else {
+                            blockButton.setText("Deblock");
+                            blockButton.setStyle("-fx-background-color: green; -fx-text-fill: white;");
+                            blockButton.setOnAction(e -> {
+                                // Handle button click event here
+                                // For example, you can call a method to handle blocking/deblocking
+                                user.setEtat(1);
+                                us.update(user);
+                                fnReloadData();
+                            });
+                        }
+                        user.setBlockButton(blockButton);
+                        userList.add(user);
                     }
                 }
                 tableViewUsers.setItems(userList);
             } catch (SQLException ex) {
-                Logger.getLogger(AffichageUsersController.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println(ex.getMessage());
             }
         } else if (comboBox.getSelectionModel().getSelectedItem().toString().equals("numero")) {
             userList.clear();
@@ -322,21 +318,7 @@ public class AffichageUsersController {
                         // Récupération de l'état de vérification de l'utilisateur
                         String verificationStatus = resultSet.getInt("is_verified") == 1 ? "Compte Verified" : "Compte non Verified";
 
-                        // Création du bouton d'état de blocage
-                        Button blockButton = new Button();
-                        String etat;
-                        if (!resultSet.getBoolean("etat")) {
-                            blockButton.setText("Blocked");
-                            blockButton.setStyle("-fx-background-color: red; -fx-text-fill: white;");
-                            etat = "Blocked";
-                        } else {
-                            blockButton.setText("Deblocked");
-                            blockButton.setStyle("-fx-background-color: green; -fx-text-fill: white;");
-                            etat = "Deblocked";
-                        }
-
-                        // Ajout de l'utilisateur à la liste des utilisateurs
-                        userList.add(new User(
+                        User user = new User(
                                 resultSet.getInt("id"),
                                 resultSet.getString("username"),
                                 resultSet.getString("email"),
@@ -349,14 +331,43 @@ public class AffichageUsersController {
                                 resultSet.getInt("cin"),
                                 resultSet.getInt("etat"),
                                 resultSet.getString("image_url"),
-                                resultSet.getString("borchure_filename")
+                                resultSet.getString("borchure_filename")// Ajout de l'état de blocage
 
-                        ));
+                        );
+                        if(user.getIs_verified())
+                            user.setVerified("Verified");
+                        else
+                            user.setVerified("Not Verified");
+                        UserService us = new UserService();
+                        Button blockButton = new Button();
+                        if (user.getEtat() == 1) {
+                            blockButton.setText("Block");
+                            blockButton.setStyle("-fx-background-color: red; -fx-text-fill: white;");
+                            blockButton.setOnAction(e -> {
+                                // Handle button click event here
+                                // For example, you can call a method to handle blocking/deblocking
+                                user.setEtat(0);
+                                us.update(user);
+                                fnReloadData();
+                            });
+                        } else {
+                            blockButton.setText("Deblock");
+                            blockButton.setStyle("-fx-background-color: green; -fx-text-fill: white;");
+                            blockButton.setOnAction(e -> {
+                                // Handle button click event here
+                                // For example, you can call a method to handle blocking/deblocking
+                                user.setEtat(1);
+                                us.update(user);
+                                fnReloadData();
+                            });
+                        }
+                        user.setBlockButton(blockButton);
+                        userList.add(user);
                     }
                 }
                 tableViewUsers.setItems(userList);
             } catch (SQLException ex) {
-                Logger.getLogger(AffichageUsersController.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println(ex.getMessage());
             }
 
 
@@ -371,21 +382,7 @@ public class AffichageUsersController {
                         // Récupération de l'état de vérification de l'utilisateur
                         String verificationStatus = resultSet.getInt("is_verified") == 1 ? "Compte Verified" : "Compte non Verified";
 
-                        // Création du bouton d'état de blocage
-                        Button blockButton = new Button();
-                        String etat;
-                        if (!resultSet.getBoolean("etat")) {
-                            blockButton.setText("Blocked");
-                            blockButton.setStyle("-fx-background-color: red; -fx-text-fill: white;");
-                            etat = "Blocked";
-                        } else {
-                            blockButton.setText("Deblocked");
-                            blockButton.setStyle("-fx-background-color: green; -fx-text-fill: white;");
-                            etat = "Deblocked";
-                        }
-
-                        // Ajout de l'utilisateur à la liste des utilisateurs
-                        userList.add(new User(
+                        User user = new User(
                                 resultSet.getInt("id"),
                                 resultSet.getString("username"),
                                 resultSet.getString("email"),
@@ -398,14 +395,43 @@ public class AffichageUsersController {
                                 resultSet.getInt("cin"),
                                 resultSet.getInt("etat"),
                                 resultSet.getString("image_url"),
-                                resultSet.getString("borchure_filename")
+                                resultSet.getString("borchure_filename")// Ajout de l'état de blocage
 
-                        ));
+                        );
+                        if(user.getIs_verified())
+                            user.setVerified("Verified");
+                        else
+                            user.setVerified("Not Verified");
+                        UserService us = new UserService();
+                        Button blockButton = new Button();
+                        if (user.getEtat() == 1) {
+                            blockButton.setText("Block");
+                            blockButton.setStyle("-fx-background-color: red; -fx-text-fill: white;");
+                            blockButton.setOnAction(e -> {
+                                // Handle button click event here
+                                // For example, you can call a method to handle blocking/deblocking
+                                user.setEtat(0);
+                                us.update(user);
+                                fnReloadData();
+                            });
+                        } else {
+                            blockButton.setText("Deblock");
+                            blockButton.setStyle("-fx-background-color: green; -fx-text-fill: white;");
+                            blockButton.setOnAction(e -> {
+                                // Handle button click event here
+                                // For example, you can call a method to handle blocking/deblocking
+                                user.setEtat(1);
+                                us.update(user);
+                                fnReloadData();
+                            });
+                        }
+                        user.setBlockButton(blockButton);
+                        userList.add(user);
                     }
                 }
                 tableViewUsers.setItems(userList);
             } catch (SQLException ex) {
-                Logger.getLogger(AffichageUsersController.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println(ex.getMessage());
             }
         }else if (comboBox.getSelectionModel().getSelectedItem().toString().equals("date")) {
             userList.clear();
@@ -418,21 +444,7 @@ public class AffichageUsersController {
                         // Récupération de l'état de vérification de l'utilisateur
                         String verificationStatus = resultSet.getInt("is_verified") == 1 ? "Compte Verified" : "Compte non Verified";
 
-                        // Création du bouton d'état de blocage
-                        Button blockButton = new Button();
-                        String etat;
-                        if (!resultSet.getBoolean("etat")) {
-                            blockButton.setText("Blocked");
-                            blockButton.setStyle("-fx-background-color: red; -fx-text-fill: white;");
-                            etat = "Blocked";
-                        } else {
-                            blockButton.setText("Deblocked");
-                            blockButton.setStyle("-fx-background-color: green; -fx-text-fill: white;");
-                            etat = "Deblocked";
-                        }
-
-                        // Ajout de l'utilisateur à la liste des utilisateurs
-                        userList.add(new User(
+                        User user = new User(
                                 resultSet.getInt("id"),
                                 resultSet.getString("username"),
                                 resultSet.getString("email"),
@@ -445,14 +457,43 @@ public class AffichageUsersController {
                                 resultSet.getInt("cin"),
                                 resultSet.getInt("etat"),
                                 resultSet.getString("image_url"),
-                                resultSet.getString("borchure_filename")
+                                resultSet.getString("borchure_filename")// Ajout de l'état de blocage
 
-                        ));
+                        );
+                        if(user.getIs_verified())
+                            user.setVerified("Verified");
+                        else
+                            user.setVerified("Not Verified");
+                        UserService us = new UserService();
+                        Button blockButton = new Button();
+                        if (user.getEtat() == 1) {
+                            blockButton.setText("Block");
+                            blockButton.setStyle("-fx-background-color: red; -fx-text-fill: white;");
+                            blockButton.setOnAction(e -> {
+                                // Handle button click event here
+                                // For example, you can call a method to handle blocking/deblocking
+                                user.setEtat(0);
+                                us.update(user);
+                                fnReloadData();
+                            });
+                        } else {
+                            blockButton.setText("Deblock");
+                            blockButton.setStyle("-fx-background-color: green; -fx-text-fill: white;");
+                            blockButton.setOnAction(e -> {
+                                // Handle button click event here
+                                // For example, you can call a method to handle blocking/deblocking
+                                user.setEtat(1);
+                                us.update(user);
+                                fnReloadData();
+                            });
+                        }
+                        user.setBlockButton(blockButton);
+                        userList.add(user);
                     }
                 }
                 tableViewUsers.setItems(userList);
             } catch (SQLException ex) {
-                Logger.getLogger(AffichageUsersController.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println(ex.getMessage());
             }
         }
     }

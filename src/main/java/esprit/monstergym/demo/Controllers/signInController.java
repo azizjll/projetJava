@@ -67,45 +67,54 @@ public class signInController implements Initializable {
             }
             if (authenticatedUser != null) {
                 try {
-                    // Load appropriate dashboard based on user role
-                    if (authenticatedUser.hasRole("ROLE_ADMIN")) {
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/esprit/monstergym/demo/DashboardAdmin.fxml"));
-                        Parent root = loader.load();
+                    if (authenticatedUser.getEtat() == 1) {
 
-                        // Pass the user to the DashboardAdminController
+
+                        if(authenticatedUser.getIs_verified()){
+                            if (authenticatedUser.hasRole("ROLE_ADMIN")) {
+                                FXMLLoader loader = new FXMLLoader(getClass().getResource("/esprit/monstergym/demo/DashboardAdmin.fxml"));
+                                Parent root = loader.load();
+
+                                // Pass the user to the DashboardAdminController
                        /* DashboardAdminController dashboardAdminController = loader.getController();
                         dashboardAdminController.setUser(authenticatedUser);*/
 
-                        // Create a new stage for the new scene
-                        Stage newStage = new Stage();
-                        newStage.setScene(new Scene(root));
-                        newStage.show();
+                                // Create a new stage for the new scene
+                                Stage newStage = new Stage();
+                                newStage.setScene(new Scene(root));
+                                newStage.show();
 
-                        // Close the current stage
-                        Stage currentStage = (Stage) tfEmail.getScene().getWindow();
-                        currentStage.close();
-                    } else if (authenticatedUser.hasRole("ROLE_CLIENT") || authenticatedUser.hasRole("ROLE_COACH")) {
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/esprit/monstergym/demo/DashboardClient.fxml"));
-                        Parent root = loader.load();
+                                // Close the current stage
+                                Stage currentStage = (Stage) tfEmail.getScene().getWindow();
+                                currentStage.close();
+                            } else if (authenticatedUser.hasRole("ROLE_CLIENT") || authenticatedUser.hasRole("ROLE_COACH")) {
+                                FXMLLoader loader = new FXMLLoader(getClass().getResource("/esprit/monstergym/demo/DashboardClient.fxml"));
+                                Parent root = loader.load();
 
-                        // Pass the user to the DashboardClientController
-
-
+                                // Pass the user to the DashboardClientController
 
 
-                        // Create a new stage for the new scene
-                        Stage newStage = new Stage();
-                        newStage.setScene(new Scene(root));
-                        newStage.show();
+                                // Create a new stage for the new scene
+                                Stage newStage = new Stage();
+                                newStage.setScene(new Scene(root));
+                                newStage.show();
 
-                        // Close the current stage
-                        Stage currentStage = (Stage) tfEmail.getScene().getWindow();
-                        currentStage.close();
+                                // Close the current stage
+                                Stage currentStage = (Stage) tfEmail.getScene().getWindow();
+                                currentStage.close();
+                            } else {
+                                // User has no role assigned, show error message
+                                showErrorAlert("User role not assigned.");
+                            }
+                        }else{
+                            fxml = FXMLLoader.load(getClass().getResource("/esprit/monstergym/demo/MailConfirm.fxml"));
+                            vbox.getChildren().setAll(fxml);
+                        }
+
                     } else {
-                        // User has no role assigned, show error message
-                        showErrorAlert("User role not assigned.");
+                        showErrorAlert("Please contact the system admin to active your account");
                     }
-                } catch (IOException e) {
+                }catch (IOException e) {
                     e.printStackTrace();
                 }
             } else {

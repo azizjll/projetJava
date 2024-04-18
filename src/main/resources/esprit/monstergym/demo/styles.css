@@ -1,13 +1,15 @@
 /* 
-    Created on : Feb 22, 2020, 2:39:34 PM
+    Created on : Feb 22, 2024, 2:39:34 PM
     Author     : Admin
 */
 .parent{
     -fx-background-color: transparent;
 }
 .pane{
-   -fx-background-color: #ED7F10
-;
+   -fx-background-color: #ED7F10;
+
+
+
 }
 .trans-btn-white-border{
     -fx-background-color: transparent;
@@ -29,7 +31,7 @@
     -fx-border-width: 0px 0px 1px 0px;
 }
 .tf{
-    -fx-background-color: transparent;    
+    -fx-background-color: transparent;
 }
 .blue-btn{
     -fx-background-color: #2196f3;
@@ -41,8 +43,11 @@
     -fx-background-color:transparent;
 }
 .pane{
-    -fx-background-color:#f78c7b;
+    -fx-background-color: #e56e37;
+    -fx-background-image:url("/esprit/monstergym/demo/image/Weights-classes-sheffield.jpg");
+
     -fx-background-size:cover;
+
 }
 
 .pane2{
@@ -125,6 +130,8 @@
 
 .tf{
     -fx-background-color:transparent;
+
+
 
 }
 .tf:focused{

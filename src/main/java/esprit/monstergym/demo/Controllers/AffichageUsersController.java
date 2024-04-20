@@ -1,7 +1,13 @@
 package esprit.monstergym.demo.Controllers;
 
+import java.awt.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -9,6 +15,10 @@ import java.util.function.Predicate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import esprit.monstergym.demo.Entities.User;
 import esprit.monstergym.demo.Service.UserService;
@@ -19,11 +29,20 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.event.ActionEvent;
+import javafx.scene.Parent;
+import javafx.fxml.FXMLLoader;
+import javafx.stage.Stage;
+
+
+
 import javafx.util.Callback;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.scene.input.MouseEvent;
@@ -73,15 +92,8 @@ public class AffichageUsersController {
 
 
 
-    @FXML
-    void handleChart(ActionEvent event) {
 
-    }
 
-    @FXML
-    void handleSaveFile(ActionEvent event) {
-
-    }
 
 
     @FXML
@@ -497,6 +509,86 @@ public class AffichageUsersController {
             }
         }
     }
+
+
+    @FXML
+    void handleSaveFile() throws FileNotFoundException, DocumentException, BadElementException, IOException, SQLException {
+
+
+        Document doc= new Document();
+        PdfWriter.getInstance(doc,new FileOutputStream("User_list.pdf"));
+        doc.open();
+        String format="dd/mm/yy hh:mm";
+        SimpleDateFormat formater=new SimpleDateFormat(format);
+        java.util.Date date=new java.util.Date();
+        Paragraph paragraph = new Paragraph("MONSTER GYM");
+        paragraph.setAlignment(com.itextpdf.text.Element.ALIGN_CENTER);
+
+        doc.add(paragraph);
+        doc.add(new Paragraph("\n"));
+        doc.add(new Paragraph("All users information in this table :"+"\n"));
+        doc.add(new Paragraph("\n"));
+        PdfPTable t = new PdfPTable(6);
+        // Set the total width of the table to the width of the page
+        t.setTotalWidth(doc.getPageSize().getWidth() - doc.leftMargin() - doc.rightMargin());
+
+        PdfPCell cell = new PdfPCell(new Phrase("Username"));
+        cell.setBackgroundColor(BaseColor.PINK); // set the background color of the cell
+        t.addCell(cell);
+
+        PdfPCell cell1 = new PdfPCell(new Phrase("Email"));
+        cell1.setBackgroundColor(BaseColor.PINK); // set the background color of the cell
+        t.addCell(cell1);
+
+        PdfPCell cell2 = new PdfPCell(new Phrase("Date Naissance"));
+        cell2.setBackgroundColor(BaseColor.PINK); // set the background color of the cell
+        t.addCell(cell2);
+
+        PdfPCell cell3 = new PdfPCell(new Phrase("Phone Number"));
+        cell3.setBackgroundColor(BaseColor.PINK); // set the background color of the cell
+        t.addCell(cell3);
+
+        PdfPCell cell4 = new PdfPCell(new Phrase("IsVerified"));
+        cell4.setBackgroundColor(BaseColor.PINK); // set the background color of the cell
+        t.addCell(cell4);
+
+        PdfPCell cell5 = new PdfPCell(new Phrase("etat"));
+        cell5.setBackgroundColor(BaseColor.PINK); // set the background color of the cell
+        t.addCell(cell5);
+
+
+        for (User user: userList) {
+            t.addCell(user.getUsername());
+            t.addCell(user.getEmail());
+            t.addCell(user.getDateNaissance().toString());
+            t.addCell(user.getNumero());
+            t.addCell(user.getVerified());
+            t.addCell(String.valueOf(user.getEtat()));;
+        }
+        doc.add(t);
+        Desktop.getDesktop().open(new File("User_list.pdf"));
+
+        doc.close();
+    }
+
+
+
+    @FXML
+    void handleChart(ActionEvent event) throws IOException {
+        // Load the FXML file for the new stage
+        Parent root = FXMLLoader.load(getClass().getResource("/esprit/monstergym/demo/Chart.fxml"));
+        // Create the new stage
+        Stage newStage = new Stage();
+        // Set the title of the new stage
+        newStage.setTitle("BarChart");
+        // Create the scene for the new stage
+        Scene scene = new Scene(root);
+        newStage.setScene(scene);
+        // Show the new stage
+        newStage.show();
+
+    }
+
 
 
 

@@ -12,6 +12,7 @@ module esprit.monstergym.demo {
     requires mail;
     requires AnimateFX;
     requires de.jensd.fx.glyphs.fontawesome;
+    requires itextpdf;
     //requires mail;
     //requires java.mail;
 

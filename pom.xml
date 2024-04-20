@@ -102,6 +102,11 @@
           <version>17.0.35</version>
       </dependency>
       <dependency>
+          <groupId>com.itextpdf</groupId>
+          <artifactId>itextpdf</artifactId>
+          <version>5.5.13.2</version>
+      </dependency>
+      <dependency>
           <groupId>org.openjfx</groupId>
           <artifactId>javafx-graphics</artifactId>
           <version>17.0.6</version>

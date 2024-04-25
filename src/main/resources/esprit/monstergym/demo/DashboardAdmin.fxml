@@ -13,7 +13,7 @@
    <children>
       <VBox prefHeight="600.0" prefWidth="294.0" style="-fx-background-color: #c39f6d;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Pane prefHeight="134.0" prefWidth="294.0" style="-fx-background-color: #c39f6d;" styleClass="pane">
+            <Pane prefHeight="134.0" prefWidth="294.0" styleClass="pane">
                <children>
                   <Label layoutX="29.0" layoutY="43.0" prefHeight="53.0" prefWidth="281.0" text="MONSTER GYM" textFill="WHITE">
                      <font>

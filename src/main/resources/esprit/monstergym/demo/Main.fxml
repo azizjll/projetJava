@@ -16,7 +16,7 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label layoutX="21.0" layoutY="134.0" prefHeight="64.0" prefWidth="222.0" text="Lorem ipsum is a dummy text for websites." textFill="WHITE" wrapText="true">
+            <Label layoutX="21.0" layoutY="134.0" prefHeight="64.0" prefWidth="222.0" text="Welcome in our app. Hope to enjoy with us and get the best services." textFill="WHITE" wrapText="true">
                <font>
                   <Font size="16.0" />
                </font>
@@ -27,7 +27,7 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label layoutX="759.0" layoutY="83.0" prefHeight="64.0" prefWidth="222.0" text="Lorem ipsum is a dummy text for websites." textFill="WHITE" wrapText="true">
+            <Label layoutX="722.0" layoutY="83.0" prefHeight="64.0" prefWidth="259.0" text="Welcome in our app. Hope to enjoy with us and get the best services." textFill="WHITE" wrapText="true">
                <font>
                   <Font size="16.0" />
                </font>

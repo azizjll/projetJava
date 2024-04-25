@@ -6,7 +6,7 @@
     -fx-background-color: transparent;
 }
 .pane{
-   -fx-background-color: #ED7F10;
+   -fx-background-color: #dd8e54;
 
 
 
@@ -43,8 +43,8 @@
     -fx-background-color:transparent;
 }
 .pane{
-    -fx-background-color: #e56e37;
-    -fx-background-image:url("/esprit/monstergym/demo/image/Weights-classes-sheffield.jpg");
+    -fx-background-color: #dd8e54;
+    -fx-background-image: url("/image/Weights-classes-sheffield.jpg");
 
     -fx-background-size:cover;
 

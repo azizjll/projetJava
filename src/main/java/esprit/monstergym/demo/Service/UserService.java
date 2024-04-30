@@ -3,10 +3,13 @@ package esprit.monstergym.demo.Service;
 import esprit.monstergym.demo.Entities.User;
 import esprit.monstergym.demo.Interfaces.IService;
 import esprit.monstergym.demo.Utils.ConnectionManager;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.mindrot.jbcrypt.BCrypt;
@@ -149,7 +152,8 @@ public class UserService implements IService<User> {
             // Si l'e-mail n'existe pas, insérer l'utilisateur dans la base de données
             if (!resultSet.isBeforeFirst()) {
                 // Hasher le mot de passe avant de l'enregistrer dans la base de données
-                String hashedPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
+                PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+                String hashedPassword = passwordEncoder.encode(user.getPassword());
 
                 // Préparer la requête d'insertion avec les données de l'utilisateur
                 preparedStatement = conn.prepareStatement(query);
@@ -212,7 +216,11 @@ public class UserService implements IService<User> {
 
             if (resultSet.next()) {
                 String hashedPasswordFromDB = resultSet.getString("password");
-                if (BCrypt.checkpw(password, hashedPasswordFromDB)) {
+
+                // Compare hashed password from DB with provided password
+                PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+                if (passwordEncoder.matches(password, hashedPasswordFromDB)) {
+                    // Passwords match, create User object
                     user = new User(
                             resultSet.getInt("id"),
                             resultSet.getString("username"),

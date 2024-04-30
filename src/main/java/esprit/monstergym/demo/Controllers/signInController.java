@@ -71,7 +71,7 @@ public class signInController implements Initializable {
 
 
                         if(authenticatedUser.getIs_verified()){
-                            if (authenticatedUser.hasRole("ROLE_ADMIN")) {
+                            if (authenticatedUser.hasRole("[\"ROLE_ADMIN\"]")) {
                                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/esprit/monstergym/demo/DashboardAdmin.fxml"));
                                 Parent root = loader.load();
 
@@ -87,7 +87,7 @@ public class signInController implements Initializable {
                                 // Close the current stage
                                 Stage currentStage = (Stage) tfEmail.getScene().getWindow();
                                 currentStage.close();
-                            } else if (authenticatedUser.hasRole("ROLE_CLIENT") || authenticatedUser.hasRole("ROLE_COACH")) {
+                            } else if (authenticatedUser.hasRole("[\"ROLE_CLIENT\"]") || authenticatedUser.hasRole("[\"ROLE_COACH\"]")) {
                                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/esprit/monstergym/demo/DashboardClient.fxml"));
                                 Parent root = loader.load();
 

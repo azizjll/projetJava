@@ -26,7 +26,7 @@
                   <Insets bottom="130.0" />
                </VBox.margin>
             </Pane>
-            <Button fx:id="btnHome" alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="269.0" minHeight="18.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="294.0" styleClass="pink-btn" text="Home">
+            <Button fx:id="btnHome" alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="269.0" minHeight="18.0" mnemonicParsing="false" onAction="#handleClicks" prefHeight="37.0" prefWidth="294.0" styleClass="pink-btn" text="Home">
                <padding>
                   <Insets left="50.0" />
                </padding>

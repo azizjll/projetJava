@@ -100,25 +100,31 @@ public class signUpController implements Initializable {
 
         // Check if all fields are valid
         if (bName && bEmail && bConfirmEmail && bTel && bPass && bConfPass && bEqualPassword && bDate) {
-            String role = "[ROLE_CLIENT]";
+            String role = "";
             if(tfRoles.getValue() != null && !tfRoles.getValue().equals("")){
                 if(tfRoles.getValue().equals("Coach")){
-                    role = "[ROLE_COACH]";
+                    role = "[\"ROLE_COACH\"]";
+                }else if (tfRoles.getValue().equals("Client")){
+                    role = "[\"ROLE_CLIENT\"]";
+                }
+                if (ps.SignUpUser(new User(tfFullName.getText(), tfEmail.getText(), tfNumber.getText(), tfPassword.getText(),tfDate.getValue(),role))) {
+                    // Assuming Main.fxml is the next view after signup
+                    Parent root = FXMLLoader.load(getClass().getResource("/esprit/monstergym/demo/Main.fxml"));
+                    tfFullName.getScene().setRoot(root);
+
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setContentText("Account created successfully!");
+                    alert.setHeaderText(null);
+                    alert.setTitle("Success");
+                    alert.show();
+                } else {
+                    showErrorAlert("Email already exists in the database!!");
                 }
             }
-            if (ps.SignUpUser(new User(tfFullName.getText(), tfEmail.getText(), tfNumber.getText(), tfPassword.getText(),tfDate.getValue(),role))) {
-                // Assuming Main.fxml is the next view after signup
-                Parent root = FXMLLoader.load(getClass().getResource("/esprit/monstergym/demo/Main.fxml"));
-                tfFullName.getScene().setRoot(root);
-
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setContentText("Account created successfully!");
-                alert.setHeaderText(null);
-                alert.setTitle("Success");
-                alert.show();
-            } else {
-                showErrorAlert("Email already exists in the database!!");
+            else{
+                showErrorAlert("Please choose a role for your account");
             }
+
         } else {
             showErrorAlert("All information should be valid!");
         }

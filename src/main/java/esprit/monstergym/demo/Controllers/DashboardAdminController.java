@@ -16,6 +16,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.layout.BackgroundFill;
 import javafx.fxml.FXMLLoader;
 import animatefx.animation.Shake;
+import animatefx.animation.Pulse;
 import javafx.geometry.Insets;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -118,6 +119,14 @@ public class DashboardAdminController {
             Parent fxml = FXMLLoader.load(getClass().getResource("/esprit/monstergym/demo/Profil.fxml"));
             vBoxDashboardAdmin.getChildren().removeAll();
             vBoxDashboardAdmin.getChildren().setAll(fxml);
+
+        }else if(event.getSource() == btnHome){
+            lplStatusMini.setText("/Home");
+            lplStatus.setText("HOME");
+            pnlStatus.setBackground(new Background(new BackgroundFill(Color.rgb(174, 127, 66),CornerRadii.EMPTY,Insets.EMPTY)));
+            new Pulse(pnlStatus).play();
+            vBoxDashboardAdmin.getChildren().removeAll();
+            vBoxDashboardAdmin.setVisible(false);
 
         }
 

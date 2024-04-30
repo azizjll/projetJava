@@ -95,7 +95,7 @@ public class AddUserController implements Initializable {
 
         // Check if all fields are valid
         if (bName && bEmail &&  bTel && bPass && bConfPass && bEqualPassword && bDate) {
-            if (ps.SignUpUser(new User(tfFullName.getText(), tfEmail.getText(), tfNumber.getText(), tfPassword.getText(),tfDate.getValue(),"[ROLE_ADMIN]"))) {
+            if (ps.SignUpUser(new User(tfFullName.getText(), tfEmail.getText(), tfNumber.getText(), tfPassword.getText(),tfDate.getValue(),"[\"ROLE_ADMIN\"]"))) {
                 // Assuming Main.fxml is the next view after signup
                 Parent root = FXMLLoader.load(getClass().getResource("/esprit/monstergym/demo/DashboardAdmin.fxml"));
                 tfFullName.getScene().setRoot(root);

@@ -6,8 +6,9 @@
     -fx-background-color: transparent;
 }
 .pane{
-   -fx-background-color: #dd8e54;
 
+
+    -fx-background-size:cover;
 
 
 }
@@ -25,10 +26,11 @@
 .blue-panel{
     -fx-background-color: #151928;
 }
-.tf_box{
+.tf_box {
     -fx-background-color: transparent;
     -fx-border-color: #DEDEE4;
     -fx-border-width: 0px 0px 1px 0px;
+    -fx-text-fill: white; /* Set text color to white */
 }
 .tf{
     -fx-background-color: transparent;
@@ -41,13 +43,6 @@
 
 .parent{
     -fx-background-color:transparent;
-}
-.pane{
-    -fx-background-color: #dd8e54;
-    -fx-background-image: url("/image/Weights-classes-sheffield.jpg");
-
-    -fx-background-size:cover;
-
 }
 
 .pane2{
@@ -92,17 +87,17 @@
 }
 
 .white-pane-signIn{
-    /*-fx-background-image:url("../image/signIn.jpg");*/
+    /*-fx-background-esprit.monstergym.demo.Controllers.image:url("../esprit.monstergym.demo.Controllers.image/signIn.jpg");*/
     -fx-background-size:cover;
 }
 
 .white-pane-forget{
-    /*-fx-background-image:url("../image/11599.jpg");*/
+    /*-fx-background-esprit.monstergym.demo.Controllers.image:url("../esprit.monstergym.demo.Controllers.image/11599.jpg");*/
     -fx-background-size:cover;
 }
 
 .white-pane-signUp{
-    /* -fx-background-image:url("../image/backforgetLeft.jpg");*/
+    /* -fx-background-esprit.monstergym.demo.Controllers.image:url("../esprit.monstergym.demo.Controllers.image/backforgetLeft.jpg");*/
     -fx-background-size:cover;
 }
 

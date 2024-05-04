@@ -17,6 +17,7 @@ module esprit.monstergym.demo {
     requires com.google.zxing.javase;
     requires java.xml.bind;
     requires spring.security.crypto;
+    requires org.apache.pdfbox;
     //requires mail;
     //requires java.mail;
 

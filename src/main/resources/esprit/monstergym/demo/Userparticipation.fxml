@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="850.0" prefWidth="1539.0" style="-fx-background-color: #d2b998;" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="esprit.monstergym.demo.Controllers.UserparticipationController">
+   <children>
+      <VBox fx:id="vBoxDashboardClient" layoutX="32.0" layoutY="14.0" prefHeight="538.0" prefWidth="1203.0" styleClass="white-pane">
+         <children>
+            <AnchorPane prefHeight="400.0" prefWidth="600.0">
+               <children>
+                  <AnchorPane layoutX="6.0" layoutY="-9.0" prefHeight="482.0" prefWidth="920.0" style="-fx-background-radius: 10;">
+                     <children>
+                        <Button fx:id="supres" layoutX="246.0" layoutY="380.0" mnemonicParsing="false" onAction="#suptr" text="Supprimer" />
+                        <TextField fx:id="nomm" layoutX="75.0" layoutY="380.0" />
+                        <Text fill="WHITE" layoutX="75.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste de Participation" />
+                        <Label layoutX="575.0" layoutY="217.0" text="telephone" textFill="WHITE" />
+                        <Label layoutX="572.0" layoutY="124.0" text="Nom" textFill="WHITE" />
+                        <Label layoutX="573.0" layoutY="169.0" text="prenom" textFill="WHITE" />
+                        <Label layoutX="575.0" layoutY="268.0" text="Date" textFill="WHITE" />
+                        <TextField fx:id="pren" layoutX="673.0" layoutY="165.0" />
+                        <TextField fx:id="tele" layoutX="673.0" layoutY="213.0" />
+                        <TextField fx:id="nom" layoutX="673.0" layoutY="120.0" />
+                        <DatePicker fx:id="datePicker" layoutX="673.0" layoutY="264.0" prefWidth="200.0" />
+                        <Label layoutX="575.0" layoutY="324.0" text="evenement" textFill="WHITE" />
+                        <TextField fx:id="even" layoutX="673.0" layoutY="320.0" />
+                        <Label layoutX="589.0" layoutY="384.0" text="email" textFill="WHITE" />
+                        <TextField fx:id="mail" layoutX="673.0" layoutY="380.0" />
+                        <Button fx:id="moditr" layoutX="391.0" layoutY="386.0" mnemonicParsing="false" onAction="#moditr" text="Modifier" />
+                     </children>
+                  </AnchorPane>
+                  <ListView fx:id="listReservation" layoutX="74.0" layoutY="94.0" prefHeight="257.0" prefWidth="434.0" />
+                  <TextField fx:id="Searchfield" layoutX="155.0" layoutY="61.0" />
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

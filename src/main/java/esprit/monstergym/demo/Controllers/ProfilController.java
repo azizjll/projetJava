@@ -129,7 +129,7 @@ public class ProfilController implements Initializable {
 
     private UserService userService;
 
-    private String uploadImgDirectory = "C:\\Users\\Aziz Chahlaoui\\Desktop\\final\\Pi dev\\test\\public\\uploads\\brochures\\esprit.monstergym.demo.Controllers.image\\";
+    private String uploadImgDirectory = "C:\\Users\\Aziz Chahlaoui\\Desktop\\final\\Pi dev\\test\\public\\uploads\\brochures\\image\\";
 
     @FXML
     public void initialize(URL url, ResourceBundle rb) {

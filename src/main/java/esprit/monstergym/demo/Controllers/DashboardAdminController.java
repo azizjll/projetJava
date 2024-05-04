@@ -89,6 +89,11 @@ public class DashboardAdminController {
 
     @FXML
     private VBox vBoxDashboardAdmin;
+    @FXML
+    private Button btnEvent;
+
+    @FXML
+    private Button btnListRec;
 
     @FXML
     void handleClicks(ActionEvent event) throws IOException {
@@ -128,6 +133,26 @@ public class DashboardAdminController {
             vBoxDashboardAdmin.getChildren().removeAll();
             vBoxDashboardAdmin.setVisible(false);
 
+        }else if (event.getSource() == btnEvent) {
+            lplStatusMini.setText("/Home/Profil");
+            lplStatus.setText("Profil Settings");
+            vBoxDashboardAdmin.setVisible(true);
+            pnlStatus.setBackground(new Background(new BackgroundFill(Color.rgb(201, 179, 150),CornerRadii.EMPTY,Insets.EMPTY)));
+            new Swing(pnlStatus).play();
+            Parent fxml = FXMLLoader.load(getClass().getResource("/esprit/monstergym/demo/AffichageAdmin.fxml"));
+            vBoxDashboardAdmin.getChildren().removeAll();
+            vBoxDashboardAdmin.getChildren().setAll(fxml);
+        }
+
+        else if (event.getSource() == btnListRec) {
+            lplStatusMini.setText("/Home/Profil");
+            lplStatus.setText("Profil Settings");
+            vBoxDashboardAdmin.setVisible(true);
+            pnlStatus.setBackground(new Background(new BackgroundFill(Color.rgb(201, 179, 150),CornerRadii.EMPTY,Insets.EMPTY)));
+            new Swing(pnlStatus).play();
+            Parent fxml = FXMLLoader.load(getClass().getResource("/esprit/monstergym/demo/AdminParticipation.fxml"));
+            vBoxDashboardAdmin.getChildren().removeAll();
+            vBoxDashboardAdmin.getChildren().setAll(fxml);
         }
 
     }

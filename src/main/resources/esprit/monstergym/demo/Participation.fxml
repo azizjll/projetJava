@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" fx:id="NomId" prefHeight="850.0" prefWidth="1539.0" style="-fx-background-color: #d2b998;" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="esprit.monstergym.demo.Controllers.ParticipationController">
+   <children>
+      <VBox fx:id="vBoxDashboardClient" prefHeight="538.0" prefWidth="1203.0" styleClass="white-pane">
+         <children>
+            <TextField fx:id="Searchfield" prefHeight="26.0" prefWidth="1021.0" />
+            <HBox fx:id="hBoxEvents" prefHeight="433.0" prefWidth="1203.0" spacing="10" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

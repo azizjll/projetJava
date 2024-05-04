@@ -2,6 +2,8 @@ package esprit.monstergym.demo.Controllers;
 
 import animatefx.animation.Shake;
 import animatefx.animation.Swing;
+import esprit.monstergym.demo.Entities.User;
+import esprit.monstergym.demo.Service.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
@@ -60,6 +62,13 @@ public class DashboardClientController   {
     @FXML
     private Button btnParticiper;
 
+    @FXML
+    private Button btnEventCoach;
+
+    @FXML
+    private Button btnListRec1;
+    private UserService userService;
+
 
 
 
@@ -74,6 +83,55 @@ public class DashboardClientController   {
             Parent fxml = FXMLLoader.load(getClass().getResource("/esprit/monstergym/demo/Profil.fxml"));
             vBoxDashboardClient.getChildren().removeAll();
             vBoxDashboardClient.getChildren().setAll(fxml);
+        }else if (event.getSource() == btnEvent) {
+            userService = userService.getInstance();
+            User authentificatedUser = userService.getAuthenticatedUser();
+            if (authentificatedUser != null && authentificatedUser.hasRole("[\"ROLE_COACH\"]")) {
+                lplStatusMini.setText("/Home/Profil");
+                lplStatus.setText("Profil Settings");
+                vBoxDashboardClient.setVisible(true);
+                pnlStatusClient.setBackground(new Background(new BackgroundFill(Color.rgb(201, 179, 150), CornerRadii.EMPTY, Insets.EMPTY)));
+                new Swing(pnlStatusClient).play();
+                Parent fxml = FXMLLoader.load(getClass().getResource("/esprit/monstergym/demo/AdminEvent.fxml"));
+                vBoxDashboardClient.getChildren().removeAll();
+                vBoxDashboardClient.getChildren().setAll(fxml);
+            }
+        }
+        else if (event.getSource() == btnParticiper) {
+            lplStatusMini.setText("/Home/Profil");
+            lplStatus.setText("Profil Settings");
+            vBoxDashboardClient.setVisible(true);
+            pnlStatusClient.setBackground(new Background(new BackgroundFill(Color.rgb(201, 179, 150), CornerRadii.EMPTY, Insets.EMPTY)));
+            new Swing(pnlStatusClient).play();
+            Parent fxml = FXMLLoader.load(getClass().getResource("/esprit/monstergym/demo/AjoutParticipation.fxml"));
+            vBoxDashboardClient.getChildren().removeAll();
+            vBoxDashboardClient.getChildren().setAll(fxml);
+        } else if (event.getSource() == btnEventCoach) {
+            userService = userService.getInstance();
+            User authentificatedUser = userService.getAuthenticatedUser();
+            if (authentificatedUser != null && authentificatedUser.hasRole("[\"ROLE_CLIENT\"]")) {
+                lplStatusMini.setText("/Home/Profil");
+                lplStatus.setText("Profil Settings");
+                vBoxDashboardClient.setVisible(true);
+                pnlStatusClient.setBackground(new Background(new BackgroundFill(Color.rgb(201, 179, 150), CornerRadii.EMPTY, Insets.EMPTY)));
+                new Swing(pnlStatusClient).play();
+                Parent fxml = FXMLLoader.load(getClass().getResource("/esprit/monstergym/demo/Participation.fxml"));
+                vBoxDashboardClient.getChildren().removeAll();
+                vBoxDashboardClient.getChildren().setAll(fxml);
+            }
+        }else if (event.getSource() == btnListRec1) {
+            userService = userService.getInstance();
+            User authentificatedUser = userService.getAuthenticatedUser();
+            if (authentificatedUser != null && authentificatedUser.hasRole("[\"ROLE_COACH\"]")) {
+                lplStatusMini.setText("/Home/Profil");
+                lplStatus.setText("Profil Settings");
+                vBoxDashboardClient.setVisible(true);
+                pnlStatusClient.setBackground(new Background(new BackgroundFill(Color.rgb(201, 179, 150), CornerRadii.EMPTY, Insets.EMPTY)));
+                new Swing(pnlStatusClient).play();
+                Parent fxml = FXMLLoader.load(getClass().getResource("/esprit/monstergym/demo/Userparticipation.fxml"));
+                vBoxDashboardClient.getChildren().removeAll();
+                vBoxDashboardClient.getChildren().setAll(fxml);
+            }
         }
 
     }

@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="850.0" prefWidth="1539.0" style="-fx-background-color: #d2b998;" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="esprit.monstergym.demo.Controllers.ModifierPartController">
+    <children>
+        <VBox prefHeight="600.0" prefWidth="294.0" style="-fx-background-color: #c39f6d;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <Pane prefHeight="134.0" prefWidth="294.0" style="-fx-background-color: #d46d6d;" styleClass="pane">
+                    <children>
+                        <Label layoutX="43.0" layoutY="43.0" prefHeight="50.0" prefWidth="251.0" text="MONSTER GYM" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="36.0" />
+                            </font>
+                        </Label>
+                        <FontAwesomeIconView fill="WHITE" glyphName="XING" layoutY="97.0" size="70" text="" wrappingWidth="65.65001201629639" />
+                    </children>
+                    <VBox.margin>
+                        <Insets bottom="130.0" />
+                    </VBox.margin>
+                </Pane>
+                <Button fx:id="btnHomeClient" alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="269.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="294.0" styleClass="pink-btn" text="Home">
+                    <padding>
+                        <Insets left="50.0" />
+                    </padding>
+                    <font>
+                        <Font name="System Bold" size="13.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets />
+                    </VBox.margin>
+                    <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="HOME" layoutX="35.0" layoutY="30.0" size="20" />
+                    </graphic>
+                </Button>
+                <Button fx:id="btnProduit" alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="426.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="294.0" styleClass="pink-btn" text="Produits">
+                    <padding>
+                        <Insets left="50.0" />
+                    </padding>
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                    <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="USER_PLUS" size="20" />
+                    </graphic>
+                </Button>
+                <Button fx:id="btnService" alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="327.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="294.0" styleClass="pink-btn" text="Services">
+                    <padding>
+                        <Insets left="50.0" />
+                    </padding>
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                    <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="CALENDAR" size="20" />
+                    </graphic>
+                </Button>
+                <Button fx:id="btnEvent" alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="327.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="294.0" styleClass="pink-btn" text="Evenements">
+                    <padding>
+                        <Insets left="50.0" />
+                    </padding>
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                    <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="CALENDAR_PLUS_ALT" size="20" text="" />
+                    </graphic>
+                </Button>
+                <Button fx:id="btnListReservationsClient" alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="294.0" styleClass="pink-btn" text="List Réservations">
+                    <padding>
+                        <Insets left="50.0" />
+                    </padding>
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                    <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="USER_PLUS" size="20" />
+                    </graphic>
+                </Button>
+                <Button fx:id="btnParticiper" alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="275.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="294.0" styleClass="pink-btn" text="Liste Participations">
+                    <padding>
+                        <Insets left="50.0" />
+                    </padding>
+                    <font>
+                        <Font name="System Bold" size="13.0" />
+                    </font>
+                    <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="HOME" layoutX="35.0" layoutY="30.0" size="20" />
+                    </graphic>
+                </Button>
+                <Button fx:id="btnAjoutRec" alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="426.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="294.0" styleClass="pink-btn" text="Ajout Reclamation">
+                    <padding>
+                        <Insets left="50.0" />
+                    </padding>
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                    <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="USER_PLUS" size="20" />
+                    </graphic>
+                </Button>
+                <Button fx:id="btnListRec" alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="576.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="294.0" styleClass="pink-btn" text="List Reclamations">
+                    <padding>
+                        <Insets left="50.0" />
+                    </padding>
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                    <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="USER_PLUS" size="20" />
+                    </graphic>
+                </Button>
+                <Button fx:id="btncommandee" alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="294.0" styleClass="pink-btn" text="Liste des commandes">
+                    <padding>
+                        <Insets left="50.0" />
+                    </padding>
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                    <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="SHOPPING_CART" size="20" />
+                    </graphic>
+                </Button>
+                <Button fx:id="btnfacture" alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="294.0" styleClass="pink-btn" text="liste des factures">
+                    <padding>
+                        <Insets left="50.0" />
+                    </padding>
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                    <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="MONEY" size="20" />
+                    </graphic>
+                </Button>
+                <Button fx:id="btnProfilClient" alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="53.0" mnemonicParsing="false" onAction="#handleClicksClient" prefHeight="49.0" prefWidth="294.0" styleClass="pink-btn" text="Profil">
+                    <padding>
+                        <Insets left="50.0" />
+                    </padding>
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                    <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="USER" size="20" />
+                    </graphic>
+                </Button>
+                <Button fx:id="btnLogOutClient" alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="296.0" mnemonicParsing="false" onAction="#handleLogOutClient" prefHeight="48.0" prefWidth="294.0" styleClass="pink-btn" text="LOG OUT">
+                    <padding>
+                        <Insets left="50.0" />
+                    </padding>
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                    <graphic>
+                        <FontAwesomeIconView fill="WHITE" glyphName="SIGN_OUT" size="20" />
+                    </graphic>
+                </Button>
+            </children>
+        </VBox>
+        <Pane fx:id="pnlStatusClient" layoutX="294.0" layoutY="134.0" prefHeight="134.0" prefWidth="1245.0" style="-fx-background-color: #ae7f42;" AnchorPane.bottomAnchor="582.0" AnchorPane.leftAnchor="294.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="134.0">
+            <children>
+                <Label fx:id="lplStatus" layoutX="21.0" layoutY="41.0" prefHeight="66.0" prefWidth="368.0" text="HOME" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="36.0" />
+                    </font>
+                </Label>
+                <Label fx:id="lplStatusMini" layoutX="21.0" layoutY="15.0" prefHeight="43.0" prefWidth="104.0" text="/Home" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="10.0" />
+                    </font>
+                </Label>
+            </children>
+        </Pane>
+        <VBox fx:id="vBoxDashboardClient" layoutX="314.0" layoutY="291.0" prefHeight="538.0" prefWidth="1203.0" styleClass="white-pane">
+         <children>
+            <AnchorPane prefHeight="526.0" prefWidth="778.0">
+               <children>
+                  <Button fx:id="modifiertr" layoutX="416.0" layoutY="407.0" mnemonicParsing="false" onAction="#modifiertr" style="-fx-background-color: #64dd17;" text="Modifier" />
+                  <Label layoutX="105.0" layoutY="25.0" prefHeight="29.0" prefWidth="101.0" text="MODIFICATION" textFill="WHITE" />
+                  <Label layoutX="244.0" layoutY="212.0" text="telephone" textFill="#362e2e" />
+                  <Label layoutX="249.0" layoutY="98.0" text="Nom" textFill="#362e2e" />
+                  <Label layoutX="251.0" layoutY="158.0" text="prenom" textFill="#362e2e" />
+                  <Label layoutX="266.0" layoutY="258.0" text="Date" textFill="#362e2e" />
+                  <TextField fx:id="pren" layoutX="331.0" layoutY="153.0" />
+                  <TextField fx:id="tele" layoutX="343.0" layoutY="207.0" />
+                  <TextField fx:id="nom" layoutX="323.0" layoutY="93.0" />
+                  <DatePicker fx:id="datePicker" layoutX="343.0" layoutY="253.0" prefWidth="200.0" />
+                  <Label layoutX="257.0" layoutY="307.0" text="evenement" textFill="#362e2e" />
+                  <TextField fx:id="even" layoutX="343.0" layoutY="302.0" />
+                  <Label layoutX="265.0" layoutY="359.0" text="email" textFill="#362e2e" />
+                  <TextField fx:id="mail" layoutX="323.0" layoutY="354.0" />
+               </children>
+            </AnchorPane>
+         </children></VBox>
+        <Label layoutX="314.0" layoutY="29.0" prefHeight="48.0" prefWidth="302.0" text="Hello Client" textFill="#ae7f42">
+            <font>
+                <Font size="40.0" />
+            </font>
+        </Label>
+        <Label layoutX="349.0" layoutY="60.0" prefHeight="54.0" prefWidth="568.0" text="Consult our site with simplicity" textFill="#ae7f42">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Label>
+    </children>
+</AnchorPane>

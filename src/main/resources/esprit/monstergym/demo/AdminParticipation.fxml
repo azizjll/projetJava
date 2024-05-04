@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="850.0" prefWidth="1539.0" style="-fx-background-color: #d2b998;" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="esprit.monstergym.demo.Controllers.AfficherParticipationController">
+   <children>
+      <VBox fx:id="vBoxDashboardAdmin" layoutX="7.0" layoutY="14.0" prefHeight="538.0" prefWidth="1203.0" styleClass="white-pane">
+         <children>
+            <AnchorPane prefHeight="400.0" prefWidth="600.0">
+               <children>
+                  <AnchorPane prefHeight="482.0" prefWidth="920.0" style="-fx-background-radius: 10;">
+                     <children>
+                        <Button fx:id="supres" layoutX="246.0" layoutY="380.0" mnemonicParsing="false" onAction="#suptr" text="Supprimer" />
+                        <TextField fx:id="nomm" layoutX="75.0" layoutY="380.0" />
+                        <Text fill="WHITE" layoutX="75.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste de Participation" />
+                        <Button fx:id="pdf" layoutX="75.0" layoutY="58.0" mnemonicParsing="false" onAction="#pdf" text="PDF" />
+                     </children>
+                  </AnchorPane>
+                  <ListView fx:id="listReservation" layoutX="74.0" layoutY="94.0" prefHeight="257.0" prefWidth="434.0" />
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

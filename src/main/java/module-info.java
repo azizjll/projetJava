@@ -26,5 +26,8 @@ module esprit.monstergym.demo {
     exports esprit.monstergym.demo.Controllers;
     exports esprit.monstergym.demo.Entities; // Ajoutez cette ligne pour exporter le package Entities
     exports esprit.monstergym.demo.Service;
+    exports esprit.monstergym.demo.Utils;
+    opens esprit.monstergym.demo.Utils to javafx.fxml;
+
 
 }

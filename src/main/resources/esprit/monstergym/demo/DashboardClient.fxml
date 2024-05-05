@@ -73,7 +73,7 @@
                   <FontAwesomeIconView fill="WHITE" glyphName="USER_PLUS" size="20" />
                </graphic>
             </Button>
-            <Button fx:id="btnProduit" alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="426.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="294.0" styleClass="pink-btn" text="Produits">
+            <Button fx:id="btnAnnonces" alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="426.0" mnemonicParsing="false" onAction="#handleClicksClient" prefHeight="52.0" prefWidth="294.0" styleClass="pink-btn" text="Annonces">
                <padding>
                   <Insets left="50.0" />
                </padding>
@@ -187,12 +187,12 @@
       </VBox>
       <Pane fx:id="pnlStatusClient" layoutX="294.0" layoutY="134.0" prefHeight="134.0" prefWidth="1245.0" style="-fx-background-color: #ae7f42;" AnchorPane.bottomAnchor="582.0" AnchorPane.leftAnchor="294.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="134.0">
          <children>
-            <Label fx:id="lplStatus" layoutX="21.0" layoutY="41.0" prefHeight="66.0" prefWidth="368.0" text="HOME" textFill="WHITE">
+            <Label fx:id="lplStatus" layoutX="21.0" layoutY="41.0" prefHeight="66.0" prefWidth="368.0" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="36.0" />
                </font>
             </Label>
-            <Label fx:id="lplStatusMini" layoutX="21.0" layoutY="15.0" prefHeight="43.0" prefWidth="104.0" text="/Home" textFill="WHITE">
+            <Label fx:id="lplStatusMini" layoutX="21.0" layoutY="15.0" prefHeight="43.0" prefWidth="104.0" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="10.0" />
                </font>

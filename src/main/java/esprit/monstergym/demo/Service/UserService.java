@@ -328,4 +328,7 @@ public class UserService implements IService<User> {
     public void setAuthenticatedUser(User authenticatedUser) {
         this.authenticatedUser = authenticatedUser;
     }
+
+
+
 }

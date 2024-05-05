@@ -67,6 +67,9 @@ public class DashboardClientController   {
 
     @FXML
     private Button btnListRec1;
+
+    @FXML
+    private Button btnAnnonces;
     private UserService userService;
 
 
@@ -132,6 +135,15 @@ public class DashboardClientController   {
                 vBoxDashboardClient.getChildren().removeAll();
                 vBoxDashboardClient.getChildren().setAll(fxml);
             }
+        }else if(event.getSource() == btnAnnonces){
+            lplStatusMini.setText("/Home/Profil");
+            lplStatus.setText("Profil Settings");
+            vBoxDashboardClient.setVisible(true);
+            pnlStatusClient.setBackground(new Background(new BackgroundFill(Color.rgb(201, 179, 150),CornerRadii.EMPTY,Insets.EMPTY)));
+            new Swing(pnlStatusClient).play();
+            Parent fxml = FXMLLoader.load(getClass().getResource("/esprit/monstergym/demo/test.fxml"));
+            vBoxDashboardClient.getChildren().removeAll();
+            vBoxDashboardClient.getChildren().setAll(fxml);
         }
 
     }

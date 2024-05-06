@@ -91,7 +91,7 @@ public class DashboardClientController   {
             User authentificatedUser = userService.getAuthenticatedUser();
             if (authentificatedUser != null && authentificatedUser.hasRole("[\"ROLE_COACH\"]")) {
                 lplStatusMini.setText("/Home/Profil");
-                lplStatus.setText("Profil Settings");
+                lplStatus.setText("Evenement");
                 vBoxDashboardClient.setVisible(true);
                 pnlStatusClient.setBackground(new Background(new BackgroundFill(Color.rgb(201, 179, 150), CornerRadii.EMPTY, Insets.EMPTY)));
                 new Swing(pnlStatusClient).play();
@@ -102,7 +102,7 @@ public class DashboardClientController   {
         }
         else if (event.getSource() == btnParticiper) {
             lplStatusMini.setText("/Home/Profil");
-            lplStatus.setText("Profil Settings");
+            lplStatus.setText("Participation");
             vBoxDashboardClient.setVisible(true);
             pnlStatusClient.setBackground(new Background(new BackgroundFill(Color.rgb(201, 179, 150), CornerRadii.EMPTY, Insets.EMPTY)));
             new Swing(pnlStatusClient).play();
@@ -114,7 +114,7 @@ public class DashboardClientController   {
             User authentificatedUser = userService.getAuthenticatedUser();
             if (authentificatedUser != null && authentificatedUser.hasRole("[\"ROLE_CLIENT\"]")) {
                 lplStatusMini.setText("/Home/Profil");
-                lplStatus.setText("Profil Settings");
+                lplStatus.setText("evenement coach");
                 vBoxDashboardClient.setVisible(true);
                 pnlStatusClient.setBackground(new Background(new BackgroundFill(Color.rgb(201, 179, 150), CornerRadii.EMPTY, Insets.EMPTY)));
                 new Swing(pnlStatusClient).play();
@@ -127,7 +127,7 @@ public class DashboardClientController   {
             User authentificatedUser = userService.getAuthenticatedUser();
             if (authentificatedUser != null && authentificatedUser.hasRole("[\"ROLE_COACH\"]")) {
                 lplStatusMini.setText("/Home/Profil");
-                lplStatus.setText("Profil Settings");
+                lplStatus.setText("Liste de participations");
                 vBoxDashboardClient.setVisible(true);
                 pnlStatusClient.setBackground(new Background(new BackgroundFill(Color.rgb(201, 179, 150), CornerRadii.EMPTY, Insets.EMPTY)));
                 new Swing(pnlStatusClient).play();
@@ -137,7 +137,7 @@ public class DashboardClientController   {
             }
         }else if(event.getSource() == btnAnnonces){
             lplStatusMini.setText("/Home/Profil");
-            lplStatus.setText("Profil Settings");
+            lplStatus.setText("Les annonces");
             vBoxDashboardClient.setVisible(true);
             pnlStatusClient.setBackground(new Background(new BackgroundFill(Color.rgb(201, 179, 150),CornerRadii.EMPTY,Insets.EMPTY)));
             new Swing(pnlStatusClient).play();

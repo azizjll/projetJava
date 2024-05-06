@@ -403,6 +403,37 @@ public class AnnonceController {
             Separator separator = new Separator(Orientation.HORIZONTAL);
             separator.setPrefWidth(500);
 
+
+            //user id label
+            String user_id = null; // Initialize the user ID variable
+            String query = "SELECT user_id FROM annonce WHERE id = ?"; // Assuming id is used to identify annonces
+            try (Connection connection = ConnectionManager.getConnection();
+                 PreparedStatement statement = connection.prepareStatement(query)) {
+
+                // Set the ID parameter in the query
+                statement.setInt(1, annonce.getId());
+
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    if (resultSet.next()) {
+                        user_id = resultSet.getString("user_id");
+                    }
+                }
+            } catch (SQLException e) {
+                // Handle any SQL exceptions
+                e.printStackTrace();
+            }
+
+            // Create a label for the user ID
+            Label userIdLabel = new Label("User ID: " + user_id);
+            userIdLabel.setStyle("-fx-font-weight: bold;");
+
+
+            Label annonceLabel = new Label("id:"+String.valueOf(annonce.getId()));
+            //Label userIdLabel = new Label("USER ID:"+String.valueOf(annonce.getUser_id()));
+           // userIdLabel.setStyle("-fx-font-weight: bold;");
+
+
+
             Label titleLabel = new Label(annonce.getTitre());
             titleLabel.setStyle("-fx-font-weight: bold;");
             Label descriptionLabel = new Label( annonce.getDescription());
@@ -426,17 +457,25 @@ public class AnnonceController {
                 handleEditButtonAction(annonce);
             });
 
-
-            Button deleteButton = new Button("Supprimer");
-            deleteButton.setStyle(" -fx-background-color: #d21f1f; -fx-text-fill: #ebebeb;");
-
-            deleteButton.setOnAction(event -> handleDeleteButtonAction(annonce));
-            VBox vboxannoncedetails = new VBox();
-            vboxannoncedetails.getChildren().addAll(separator, titleLabel, descriptionLabel, dateLabel, replyButton);
-
             HBox hboxbuttons = new HBox();
+            userService = userService.getInstance();
+            User authentificatedUser = userService.getAuthenticatedUser();
+
+            if (user_id != null && user_id.equals(String.valueOf(authentificatedUser.getId()))) {
+                Button deleteButton = new Button("Supprimer");
+                deleteButton.setStyle(" -fx-background-color: #d21f1f; -fx-text-fill: #ebebeb;");
+
+                deleteButton.setOnAction(event -> handleDeleteButtonAction(annonce));
+                hboxbuttons.getChildren().addAll( replyButton  ,deleteButton);
+
+            }
+            VBox vboxannoncedetails = new VBox();
+
+            vboxannoncedetails.getChildren().addAll(separator, annonceLabel,userIdLabel ,titleLabel, descriptionLabel, dateLabel, replyButton);
+
+
             hboxbuttons.setSpacing(15);
-            hboxbuttons.getChildren().addAll( replyButton  ,deleteButton);
+            hboxbuttons.getChildren().addAll( replyButton  );
 
 
             VBox finalcontainer = new VBox();

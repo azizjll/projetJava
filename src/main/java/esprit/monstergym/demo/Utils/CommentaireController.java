@@ -70,18 +70,50 @@
 
             // Display each commentaire
             for (Commentaire commentaire : commentaires) {
+
+                String user_id = null; // Initialize the user ID variable
+                String query = "SELECT user_id FROM commentaire WHERE ref = ?";
+                try (Connection connection = ConnectionManager.getConnection();
+                     PreparedStatement statement = connection.prepareStatement(query)) {
+
+                    // Set the ID parameter in the query
+                    statement.setInt(1, commentaire.getRef());
+
+                    try (ResultSet resultSet = statement.executeQuery()) {
+                        if (resultSet.next()) {
+                            user_id = resultSet.getString("user_id");
+                        }
+                    }
+                } catch (SQLException e) {
+                    // Handle any SQL exceptions
+                    e.printStackTrace();
+                }
+
+                // Create a label for the user ID
+                Label userIdLabel = new Label("User ID: " + user_id);
+                userIdLabel.setStyle("-fx-font-weight: bold;");
+
                 Label messageLabel = new Label( commentaire.getMessage());
                 Label dateLabel = new Label("Date: " + commentaire.getTimestamp());
-                Button deleteButton = new Button("Delete");
-                deleteButton.setStyle("-fx-text-fill: red;");
 
-                deleteButton.setOnAction(event -> handleDeleteButtonAction(commentaire));
+                userService = userService.getInstance();
+                User authentificatedUser = userService.getAuthenticatedUser();
+
+                if (user_id != null && user_id.equals(String.valueOf(authentificatedUser.getId()))) {
+                    Button deleteButton = new Button("Delete");
+                    deleteButton.setStyle("-fx-text-fill: red;");
+
+                    deleteButton.setOnAction(event -> handleDeleteButtonAction(commentaire));
+                    commentaireContainer.getChildren().addAll(deleteButton);
+
+
+                }
                 Separator separator = new Separator(Orientation.HORIZONTAL);
                 // Create a ScrollPane and set its content to commentaireContainer
                 ScrollPane scrollPane = new ScrollPane(commentaireContainer);
                 scrollPane.setFitToWidth(true); // Ensures the ScrollPane adjusts to the width of its content
 
-                commentaireContainer.getChildren().addAll(messageLabel, dateLabel,deleteButton, separator);
+                commentaireContainer.getChildren().addAll(userIdLabel,messageLabel, dateLabel, separator);
             }
         }
 
@@ -191,7 +223,6 @@
 
         @FXML
         public void ajoutcomment() throws MessagingException {
-
             userService = userService.getInstance();
             User authentificatedUser = userService.getAuthenticatedUser();
             // Retrieve input from text fields
@@ -201,9 +232,50 @@
             String message = messageTextArea.getText();
             message = BadWordFilter.filterBadWords(message);
 
-
             int user_id = authentificatedUser.getId();
-            System.out.println(user_id);
+
+
+
+            int userId = -1; // Default value if user ID is not found
+
+            try (Connection connection = ConnectionManager.getConnection()) {
+                String query = "SELECT user_id FROM annonce WHERE id = ?";
+                try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                    preparedStatement.setInt(1, annonceId); // Set annonceId dynamically
+                    try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                        if (resultSet.next()) {
+                            userId = resultSet.getInt("user_id");
+                            // Print the user ID
+                            System.out.println("SQL User ID: " + userId);
+                        } else {
+                            System.out.println("No user found for annonce ID: " + annonceId);
+                        }
+                    }
+                }
+            } catch (SQLException e) {
+                System.err.println("Error retrieving user ID: " + e.getMessage());
+            }
+
+            String userEmail = null; // Default value if user email is not found
+
+            try (Connection connection = ConnectionManager.getConnection()) {
+                String query = "SELECT email FROM user WHERE id = ?";
+                try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                    preparedStatement.setInt(1, userId); // Set the user_id obtained from the latest post
+                    try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                        if (resultSet.next()) {
+                            userEmail = resultSet.getString("email");
+                            // Print the user email
+                            System.out.println("SQL User Email: " + userEmail);
+                        } else {
+                            System.out.println("No user found with ID: " + userId);
+                        }
+                    }
+                }
+            } catch (SQLException e) {
+                System.err.println("Error retrieving user email: " + e.getMessage());
+            }
+
 
 
 
@@ -230,11 +302,10 @@
                 commentaireService.ajoutcomment(newCommentaire, annonce_id,user_id);
                 // Send email asynchronously to avoid delaying the appearance of the comment
                 String finalMessage = message;
+                String finalUserEmail = userEmail;
                 new Thread(() -> {
                     try {
-
-                        JavaMailUtil.sendMail("manelfatnassi00@gmail.com", "nouveau commentaire reçu - MONSTER GYM", "USER a ajouté un nouveau commentaire sur votre annonce : \n\n\"" + finalMessage + "\"");
-                    } catch (MessagingException e) {
+                        JavaMailUtil.sendMail(finalUserEmail, "nouveau commentaire reçu - MONSTER GYM", "USER a ajouté un nouveau commentaire sur votre annonce : \n\n\"" + finalMessage + "\"");                    } catch (MessagingException e) {
                         e.printStackTrace();
                         // Handle email sending exception
                     }
@@ -251,8 +322,5 @@
 
             }
         }
-
-
-
     }
 

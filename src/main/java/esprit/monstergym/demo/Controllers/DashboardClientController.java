@@ -1,5 +1,6 @@
 package esprit.monstergym.demo.Controllers;
 
+import animatefx.animation.Pulse;
 import animatefx.animation.Shake;
 import animatefx.animation.Swing;
 import esprit.monstergym.demo.Entities.User;
@@ -123,10 +124,8 @@ public class DashboardClientController   {
                 vBoxDashboardClient.getChildren().setAll(fxml);
             }
         }else if (event.getSource() == btnListRec1) {
-            userService = userService.getInstance();
-            User authentificatedUser = userService.getAuthenticatedUser();
-            if (authentificatedUser != null && authentificatedUser.hasRole("[\"ROLE_COACH\"]")) {
-                lplStatusMini.setText("/Home/Profil");
+
+                lplStatusMini.setText("");
                 lplStatus.setText("Liste de participations");
                 vBoxDashboardClient.setVisible(true);
                 pnlStatusClient.setBackground(new Background(new BackgroundFill(Color.rgb(201, 179, 150), CornerRadii.EMPTY, Insets.EMPTY)));
@@ -134,9 +133,9 @@ public class DashboardClientController   {
                 Parent fxml = FXMLLoader.load(getClass().getResource("/esprit/monstergym/demo/Userparticipation.fxml"));
                 vBoxDashboardClient.getChildren().removeAll();
                 vBoxDashboardClient.getChildren().setAll(fxml);
-            }
+
         }else if(event.getSource() == btnAnnonces){
-            lplStatusMini.setText("/Home/Profil");
+            lplStatusMini.setText("");
             lplStatus.setText("Les annonces");
             vBoxDashboardClient.setVisible(true);
             pnlStatusClient.setBackground(new Background(new BackgroundFill(Color.rgb(201, 179, 150),CornerRadii.EMPTY,Insets.EMPTY)));
@@ -144,8 +143,17 @@ public class DashboardClientController   {
             Parent fxml = FXMLLoader.load(getClass().getResource("/esprit/monstergym/demo/test.fxml"));
             vBoxDashboardClient.getChildren().removeAll();
             vBoxDashboardClient.getChildren().setAll(fxml);
-        }
+        }else if(event.getSource() == btnHomeClient) {
+            lplStatusMini.setText("/Home");
+            lplStatus.setText("HOME");
+            pnlStatusClient.setBackground(new Background(new BackgroundFill(Color.rgb(174, 127, 66), CornerRadii.EMPTY, Insets.EMPTY)));
+            new Pulse(pnlStatusClient).play();
+            vBoxDashboardClient.getChildren().removeAll();
+            vBoxDashboardClient.setVisible(false);
 
+
+
+        }
     }
 
 

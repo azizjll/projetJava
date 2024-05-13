@@ -42,6 +42,18 @@ public class User {
         this.roles = role;
     }
 
+    public User(String text, String tfEmailText, String tfNumberText, String tfPasswordText, LocalDate tfDate,String role,String brochureFilename) {
+        this.username = text;
+        this.email = tfEmailText;
+        this.numero = tfNumberText;
+        this.password = tfPasswordText;
+        this.dateNaissance = Date.valueOf(tfDate);
+        this.roles = role;
+        this.brochureFilename = brochureFilename;
+    }
+
+
+
     public User(int id, String username, String email, String roles, String resetToken, String password, boolean is_verified, Date dateNaissance, String numero, Integer cin, Integer etat, String imageUrl, String brochureFilename) {
         this.id = id;
         this.username = username;
@@ -99,6 +111,8 @@ public class User {
 
     public User(String username, String email, String numTel, boolean isBlocked) {
     }
+
+
 
   /* public User(String username, String email, String numero, boolean etat) {
 

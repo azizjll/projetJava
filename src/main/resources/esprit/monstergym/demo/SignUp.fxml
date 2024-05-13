@@ -147,6 +147,25 @@
             </HBox>
          </children>
       </VBox>
+      <VBox prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="btnUploadPDF" text="Upload PDF" onAction="#handleUploadPDF" styleClass="btn">
+                     <HBox.margin>
+                        <Insets left="15.0" right="15.0" top="20.0"/>
+                     </HBox.margin>
+                  </Button>
+                  <Label fx:id="lblPDFName" text="No File Selected" styleClass="label">
+                     <HBox.margin>
+                        <Insets left="10.0"/>
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+
       <Button fx:id="btnsignUp" mnemonicParsing="false" onAction="#fnSignup" prefHeight="38.0" prefWidth="456.0" styleClass="blue-btn" text="Sign Up" textFill="WHITE">
          <font>
             <Font size="17.0" />

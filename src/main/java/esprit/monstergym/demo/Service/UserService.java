@@ -140,7 +140,7 @@ public class UserService implements IService<User> {
         boolean success = false;
 
       //  String query = "INSERT INTO user ( username, email, roles, reset_token, password, is_verified, date_naissance, numero, cin, etat, image_url, borchure_filename) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        String query = "INSERT INTO user ( username, email, password,date_naissance, numero,roles) VALUES ( ?, ?, ?, ?, ?,?)";
+        String query = "INSERT INTO user ( username, email, password,date_naissance, numero,roles,borchure_filename) VALUES ( ?, ?, ?, ?, ?,?,?)";
         try {
             conn = ConnectionManager.getConnection(); // Initialize conn
 
@@ -168,7 +168,7 @@ public class UserService implements IService<User> {
                 preparedStatement.setString(6,user.getRoles());
                // preparedStatement.setInt(10, user.getEtat());
                 //preparedStatement.setString(11, user.getImageUrl());
-               // preparedStatement.setString(12, user.getBrochureFilename());
+                preparedStatement.setString(7, user.getBrochureFilename());
 
 
                 // Exécuter la requête d'insertion

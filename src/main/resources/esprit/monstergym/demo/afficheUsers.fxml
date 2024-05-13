@@ -31,6 +31,8 @@
                   <TableColumn fx:id="emailCol" maxWidth="4500.0" minWidth="20.0" prefWidth="60.0" style="-fx-alignment: center;" text="Email" />
                   <TableColumn fx:id="dateCol" maxWidth="3800.0" minWidth="70.0" prefWidth="70.0" text="Date" />
                   <TableColumn fx:id="numeroCol" maxWidth="3500.0" prefWidth="133.5999755859375" style="-fx-alignment: center;" text="Num Tel " />
+                  <TableColumn fx:id="role" prefWidth="75.0" text="roles" />
+                  <TableColumn fx:id="brochureFilename" prefWidth="75.0" text="Brochure_File" />
                   <TableColumn fx:id="isVerifiedCol" maxWidth="4000.0" prefWidth="60.0" style="-fx-alignment: center;" text="Is_Verified" />
                   <TableColumn fx:id="etatCol" maxWidth="3300.0" prefWidth="133.5999755859375" style="-fx-alignment: center;" text="Etat" />
                </columns>

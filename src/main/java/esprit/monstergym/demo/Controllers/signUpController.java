@@ -9,12 +9,19 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.FileChooser;
 
+import java.io.File;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 public class signUpController implements Initializable {
 
@@ -61,6 +68,13 @@ public class signUpController implements Initializable {
     private PasswordField tfPassword;
     @FXML
     private ComboBox<String> tfRoles;
+    @FXML
+    private Button btnUploadPDF;
+    @FXML
+    private Label lblPDFName;
+
+
+    private File selectedPDFFile;
 
     private boolean bConfirmEmail=false,bEqualPassword = false, bConfirmPassword = false, bDate = false, bName = false, bEmail = false, bAdd = false, bTel = false, bPass = false, bConfPass = false;
 
@@ -73,6 +87,24 @@ public class signUpController implements Initializable {
         tfFullName.setOnKeyReleased(this::validatePassword);
         tfConfirmPassword.setOnKeyReleased(this::validatePassword);
         tfRoles.getItems().addAll("Client", "Coach");
+    }
+
+    @FXML
+    private void handleUploadPDF(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF Files", "*.pdf"));
+        File selectedFile = fileChooser.showOpenDialog(btnUploadPDF.getScene().getWindow());
+        if (selectedFile != null) {
+            try {
+                Path destPath = Paths.get("C:\\Users\\Aziz Chahlaoui\\Desktop\\final\\Pi dev\\test\\public\\uploads\\brochures\\" + selectedFile.getName());
+                Files.copy(selectedFile.toPath(), destPath, StandardCopyOption.REPLACE_EXISTING);
+                lblPDFName.setText(selectedFile.getName());
+                selectedPDFFile = selectedFile;
+            } catch (Exception e) {
+                lblPDFName.setText("Failed to upload");
+                e.printStackTrace();
+            }
+        }
     }
 
     @FXML
@@ -107,7 +139,7 @@ public class signUpController implements Initializable {
                 }else if (tfRoles.getValue().equals("Client")){
                     role = "[\"ROLE_CLIENT\"]";
                 }
-                if (ps.SignUpUser(new User(tfFullName.getText(), tfEmail.getText(), tfNumber.getText(), tfPassword.getText(),tfDate.getValue(),role))) {
+                if (ps.SignUpUser(new User(tfFullName.getText(), tfEmail.getText(), tfNumber.getText(), tfPassword.getText(),tfDate.getValue(),role,selectedPDFFile.getName()))) {
                     // Assuming Main.fxml is the next view after signup
                     Parent root = FXMLLoader.load(getClass().getResource("/esprit/monstergym/demo/Main.fxml"));
                     tfFullName.getScene().setRoot(root);
@@ -287,6 +319,7 @@ public class signUpController implements Initializable {
         // Compare the chosen date with the minimum date
         return chosenDate.isBefore(minDate);
     }
+
 
 
 }

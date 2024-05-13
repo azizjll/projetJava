@@ -93,6 +93,11 @@ public class AffichageUsersController {
     @FXML
     private ComboBox comboBox;
 
+    @FXML
+    private TableColumn<User, String> role;
+    @FXML
+    private TableColumn<User, String> brochureFilename;
+
     ObservableList<User> userList = FXCollections.observableArrayList();
 
     Button blockButton = null;
@@ -107,6 +112,7 @@ public class AffichageUsersController {
     @FXML
     private void initialize() {
         fnReloadData();
+        configureBrochureColumn();
 
     }
 
@@ -118,6 +124,8 @@ public class AffichageUsersController {
         etatCol.setCellValueFactory(new PropertyValueFactory<>("blockButton"));
         dateCol.setCellValueFactory(new PropertyValueFactory<>("dateNaissance"));
         isVerifiedCol.setCellValueFactory(new PropertyValueFactory<>("verified"));
+        role.setCellValueFactory(new PropertyValueFactory<>("roles"));
+        brochureFilename.setCellValueFactory(new PropertyValueFactory<>("brochureFilename"));
 
         // Charger les données depuis la base de données et les afficher dans le tableau
 
@@ -161,6 +169,38 @@ public class AffichageUsersController {
             tableViewUsers.setItems(sortedData);
         });
 
+    }
+    private void configureBrochureColumn() {
+        brochureFilename.setCellFactory(col -> new TableCell<User, String>() {
+            private final Button openPdfButton = new Button("Ouvrir PDF");
+
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+
+                if (empty || item == null) {
+                    setGraphic(null);
+                } else {
+                    setGraphic(openPdfButton);
+                    openPdfButton.setOnAction(e -> openPDF(item));
+                }
+            }
+        });
+    }
+    private void openPDF(String fileName) {
+        if (fileName != null && !fileName.isEmpty()) {
+            try {
+                File pdfFile = new File("C:\\Users\\Aziz Chahlaoui\\Desktop\\final\\Pi dev\\test\\public\\uploads\\brochures\\" + fileName);
+                if (pdfFile.exists()) {
+                    Desktop.getDesktop().open(pdfFile);
+                } else {
+                    System.out.println("Le fichier PDF n'existe pas.");
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+                System.out.println("Erreur lors de l'ouverture du fichier PDF.");
+            }
+        }
     }
     private List<User> loadDataFromDatabase() {
         List<User> data= new ArrayList<>();

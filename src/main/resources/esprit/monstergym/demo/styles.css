@@ -73,12 +73,12 @@
 }
 
 .trans-btn-white-border:hover{
-    -fx-background-color:#ae7f42;
+    -fx-background-color: #0b0b0b;
     -fx-background-radius:10px;
 }
 
 .trans-btn-white-border:pressed{
-    -fx-background-color:#b47d39;
+    -fx-background-color: #0b0b0b;
     -fx-background-radius:10px;
 }
 

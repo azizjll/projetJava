@@ -12,8 +12,9 @@
 <AnchorPane id="AnchorPane" prefHeight="850.0" prefWidth="1539.0" style="-fx-background-color: #d2b998;" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="esprit.monstergym.demo.Controllers.DashboardClientController">
    <children>
       <VBox prefHeight="600.0" prefWidth="294.0" style="-fx-background-color: #c39f6d;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+         
          <children>
-            <Pane prefHeight="134.0" prefWidth="294.0" style="-fx-background-color: rgba(229,110,55,0.91);" styleClass="pane">
+            <Pane prefHeight="134.0" prefWidth="294.0" style="-fx-background-color: rgb(174,127,66);" styleClass="pane">
                <children>
                   <Label layoutX="43.0" layoutY="43.0" prefHeight="50.0" prefWidth="251.0" text="MONSTER GYM" textFill="WHITE">
                      <font>
@@ -26,7 +27,7 @@
                   <Insets bottom="130.0" />
                </VBox.margin>
             </Pane>
-            <Button fx:id="btnHomeClient" alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="269.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="294.0" styleClass="pink-btn" text="Home">
+            <Button fx:id="btnHomeClient" alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="269.0" mnemonicParsing="false" onAction="#handleClicksClient" prefHeight="52.0" prefWidth="294.0" styleClass="pink-btn" text="Home">
                <padding>
                   <Insets left="50.0" />
                </padding>
